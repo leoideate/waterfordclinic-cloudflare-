@@ -1,0 +1,60 @@
+# --------------------------------------------------------------------------
+# Walk In GP — combined .gitignore (Laravel at root + Vite React SPA)
+# --------------------------------------------------------------------------
+
+# ---- Node / Vite (frontend) ----
+node_modules
+dist
+dist-ssr
+*.local
+public/build
+.vite
+
+# ---- Editor / OS ----
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.log
+npm-debug.log*
+yarn-error.log
+
+# ---- PHP / Composer (backend) ----
+/vendor
+/.env
+.env.backup
+/.phpunit.cache
+/phpunit.xml
+ Homestead.json
+ Homestead.yaml
+
+# ---- Laravel storage (ephemeral runtime data — never commit) ----
+/storage/*.key
+/storage/framework/maintenance.php
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/logs/*
+!/storage/logs/.gitignore
+/storage/app/private/*
+!/storage/app/private/.gitkeep
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+
+# ---- SQLite ----
+# The built-in database.sqlite file IS COMMITTED to the repo so the app
+# works on first download with zero DB setup. Do NOT ignore it.
+# But DO ignore the runtime lock/journal files SQLite creates:
+/database/*.sqlite-journal
+/database/*.sqlite-wal
+/database/*.sqlite-shm
+/database/*-dev.sqlite
+/database/twl_clinic.sqlite
+
+# ZCode agent scratch space
+.zcode/

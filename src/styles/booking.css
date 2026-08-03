@@ -1,0 +1,336 @@
+/* =====================================================================
+   Booking section + form styles
+   ===================================================================== */
+
+.booking {
+  background:
+    radial-gradient(80% 60% at 100% 0%, var(--green-50) 0%, transparent 60%),
+    var(--white);
+  position: relative;
+}
+
+.booking-grid {
+  display: grid;
+  /* The form needs the wider share: two field columns plus a three-part date
+     picker don't fit in the 1.15fr the pitch column used to leave it. */
+  grid-template-columns: 1fr 1.35fr;
+  gap: 48px;
+  align-items: start;
+}
+/* Both columns must be allowed to shrink below their content's intrinsic
+   width, otherwise the form's select rows widen the whole page. */
+.booking-grid > * { min-width: 0; }
+
+/* ---- Closed state: "choose your clinic" prompt ---- */
+.booking-closed-card {
+  max-width: 720px; margin-inline: auto; text-align: center;
+  background: #fff; border: 1px solid var(--green-100);
+  border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 44px);
+  box-shadow: var(--shadow-sm);
+}
+.booking-closed-card h2 { margin: 14px 0 10px; }
+.booking-closed-card .lead { margin-inline: auto; max-width: 520px; }
+.booking-closed-actions {
+  display: flex; flex-wrap: wrap; gap: 14px;
+  justify-content: center; margin-top: 26px;
+}
+.booking-closed-actions .btn { flex: 1 1 260px; max-width: 100%; }
+@media (max-width: 640px) {
+  /* Stack rather than squeeze — these labels are long. */
+  .booking-closed-actions { flex-direction: column; }
+  .booking-closed-actions .btn { flex: 1 1 auto; width: 100%; }
+}
+
+/* ---- Fee / Medical Card notice on the info column ---- */
+.booking-fee-banner {
+  background: #fff8e1; border: 1px solid #f4b740; border-left: 4px solid #f4b740;
+  color: #5c4408; padding: 12px 16px; border-radius: 10px;
+  font-size: 0.94rem; line-height: 1.5; margin-bottom: 24px;
+}
+
+/* ---- Left info column ---- */
+.booking-info h2 { margin-bottom: 16px; }
+.booking-info .lead { font-size: 1.12rem; margin-bottom: 28px; }
+
+.booking-benefits { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 16px; }
+.booking-benefits li { display: flex; gap: 14px; align-items: flex-start; }
+.booking-benefits .bi-icon {
+  flex: 0 0 40px; height: 40px; border-radius: 12px;
+  background: var(--green-100); color: var(--green-700);
+  display: grid; place-items: center; font-size: 1.2rem;
+}
+.booking-benefits strong { display: block; font-family: var(--font-head); }
+.booking-benefits span.muted { font-size: 0.92rem; }
+
+.booking-cta-card {
+  background: linear-gradient(135deg, var(--green-700), var(--green-900));
+  color: #fff; border-radius: var(--radius-lg); padding: 28px;
+  box-shadow: var(--shadow);
+}
+.booking-cta-card h3 { color: #fff; margin-bottom: 6px; }
+.booking-cta-card p { color: rgba(255,255,255,0.85); margin: 0; }
+.booking-cta-card .hours-quick {
+  margin-top: 16px; display: grid; gap: 6px;
+  font-size: 0.95rem; color: rgba(255,255,255,0.95);
+}
+.booking-cta-card .hours-quick div { display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.18); padding-bottom: 6px; }
+.booking-cta-card .hours-quick div:last-child { border: 0; }
+
+/* ---- Right form column ---- */
+.form-wrap {
+  background: #fff; border: 1px solid #eef2ee;
+  border-radius: var(--radius-lg); padding: clamp(20px, 3vw, 36px);
+  box-shadow: var(--shadow);
+}
+
+.form-clinic-tabs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  padding: 6px; background: var(--green-50); border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.form-clinic-tab {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px; border: 2px solid transparent; background: transparent;
+  border-radius: 12px; cursor: pointer; font-family: var(--font-head);
+  font-weight: 600; color: var(--ink-700); transition: all 0.18s ease;
+}
+.form-clinic-tab:hover { background: rgba(255,255,255,0.7); }
+.form-clinic-tab.is-active {
+  background: #fff; color: var(--green-700);
+  border-color: var(--green-500); box-shadow: var(--shadow-sm);
+}
+.form-clinic-tab .tick { color: var(--green-600); }
+
+/* LOCKED clinic chip — shown when the form is locked to one clinic (e.g.
+   the user picked a clinic from the hero/header tabs and the booking
+   section revealed itself locked). Non-interactive; just labels the form. */
+.form-clinic-locked {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: var(--green-100);
+  border: 2px solid var(--green-500);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: 1.4rem; /* icon size */
+  color: var(--green-900);
+}
+.form-clinic-locked > span:last-child { display: flex; flex-direction: column; line-height: 1.25; font-size: 1rem; }
+.form-clinic-locked strong { font-family: var(--font-head); font-weight: 700; }
+.form-clinic-locked small { font-size: 0.78rem; color: var(--ink-500); margin-top: 2px; }
+
+/* Fee + Medical Card / GMS notice — amber-tinted banner shown above the
+   submit button (and in the success card). Must be clearly visible before
+   the patient submits the booking. */
+.fee-notice {
+  background: #fff8e1;
+  border: 1px solid #f4b740;
+  border-left: 4px solid #f4b740;
+  color: #5c4408;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin: 14px 0 18px;
+}
+.fee-notice strong { color: #6e4f06; }
+
+.clinic-banner {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px 14px; flex-wrap: wrap;
+  background: var(--green-100); border-radius: 12px; padding: 10px 16px;
+  margin-bottom: 22px; font-size: 0.95rem; color: var(--green-900);
+}
+
+.booking-form { display: grid; gap: 16px; min-width: 0; }
+/* The form sits in a column whose width depends on the viewport AND on the
+   surrounding grid, so a plain `1fr 1fr` plus a viewport media query can't
+   describe "two columns only when there's room". The max() inside minmax()
+   pins the minimum track to half the row once that's ≥ 260px (so never more
+   than two columns) and to 260px below that (so auto-fit drops to one). */
+.fs-2col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(260px, (100% - 16px) / 2), 1fr));
+  gap: 16px;
+  border: 0; padding: 0; margin: 0; min-width: 0;
+}
+.fs-2col > * { min-width: 0; }
+
+.field { display: grid; gap: 6px; min-width: 0; }
+.field-label { font-weight: 600; font-size: 0.92rem; color: var(--ink-700); }
+.req { color: var(--danger); margin-left: 2px; }
+.inp {
+  width: 100%; min-width: 0; padding: 13px 14px; border-radius: 10px;
+  border: 1.5px solid #dde4df; background: #fff;
+  /* 16px keeps iOS Safari from zooming the page on focus. */
+  font-family: var(--font-body); font-size: 16px; color: var(--ink-900);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+select.inp {
+  /* A <select> is sized by its widest <option> ("September", "2026") unless
+     told otherwise — that is what pushed the booking grid past the viewport. */
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%235b6b63' d='M1.4 0 6 4.6 10.6 0 12 1.4 6 7.4 0 1.4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 11px;
+  padding-right: 32px;
+  text-overflow: ellipsis;
+}
+.inp:focus {
+  outline: none; border-color: var(--green-500);
+  box-shadow: 0 0 0 4px rgba(47, 180, 87, 0.15);
+}
+.inp[data-error="true"] { border-color: var(--danger); box-shadow: 0 0 0 4px rgba(214,69,69,0.12); }
+textarea.inp { resize: vertical; min-height: 80px; }
+
+/* Month needs the most room ("September"), Day and Year the least — and the
+   selects run compact padding so the longest month still fits rather than
+   clipping to "Septemb…". */
+.date-parts-row { display: grid; grid-template-columns: 0.72fr 1.45fr 0.83fr; gap: 8px; }
+.date-parts-row .inp {
+  padding-left: 8px; padding-right: 20px;
+  background-position: right 5px center; background-size: 9px;
+}
+@media (max-width: 380px) {
+  .date-parts-row { gap: 6px; }
+  .date-parts-row .inp { padding-left: 6px; }
+}
+
+.field-hint { font-size: 0.82rem; color: var(--ink-500); margin: 0; }
+.field-error { font-size: 0.82rem; color: var(--danger); margin: 0; font-weight: 500; }
+
+.time-slot-placeholder {
+  padding: 13px 14px; border-radius: 10px; border: 1.5px dashed #dde4df;
+  background: var(--cream); text-align: center;
+}
+.time-slot-summary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--green-600);
+  background: var(--green-50);
+}
+.time-slot-summary span { font-weight: 700; color: var(--green-900); }
+.time-slot-summary[data-error="true"] { border-color: var(--danger); }
+.time-slot-change {
+  background: none; border: none; padding: 6px 2px; color: var(--green-700);
+  font-weight: 600; font-size: 0.88rem; text-decoration: underline; cursor: pointer;
+  flex: 0 0 auto; min-height: 32px;
+}
+.time-slot-change:hover { color: var(--green-900); }
+.time-slot-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 8px; max-height: 216px; overflow-y: auto; padding: 2px;
+}
+.time-slot-grid[data-error="true"] { outline: 2px solid var(--danger); outline-offset: 3px; border-radius: 10px; }
+.time-slot-btn {
+  min-height: 44px; padding: 10px 8px; border-radius: 10px; border: 1.5px solid #dde4df;
+  background: #fff; font-family: var(--font-body); font-size: 0.88rem; font-weight: 600;
+  color: var(--ink-700); cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.time-slot-btn:hover { border-color: var(--green-500); }
+.time-slot-btn.is-selected {
+  background: var(--green-600); border-color: var(--green-600); color: #fff;
+}
+.booking-form.compact .time-slot-grid { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); max-height: 180px; }
+.booking-form.compact .time-slot-btn { padding: 9px 6px; font-size: 0.84rem; }
+
+.consent {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--green-50); padding: 14px 16px; border-radius: 10px;
+  font-size: 0.92rem; cursor: pointer; color: var(--ink-700);
+}
+.consent input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--green-600); flex: 0 0 auto; }
+.consent.has-error { background: #fdecec; }
+
+.form-foot { text-align: center; font-size: 0.86rem; margin: 4px 0 0; }
+
+/* ---- Compact form (shown inline inside the hero) ---- */
+.booking-form.compact { gap: 12px; }
+.booking-form.compact .clinic-banner { margin-bottom: 14px; padding: 8px 12px; font-size: 0.88rem; }
+.booking-form.compact .inp { padding: 11px 12px; font-size: 0.96rem; }
+.booking-form.compact .fs-2col { gap: 12px; }
+.booking-form.compact .field-label { font-size: 0.85rem; }
+.booking-form.compact .consent { padding: 12px 14px; font-size: 0.86rem; }
+.booking-form.compact .form-foot { font-size: 0.8rem; }
+
+/* ---- Submit spinner + disabled state ---- */
+.btn[disabled] { opacity: 0.7; cursor: progress; }
+.spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.45);
+  border-top-color: #fff;
+  display: inline-block; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Server / fallback error banner ---- */
+.form-server-error {
+  background: #fdecec; color: #a32323; border: 1px solid #f5c6c6;
+  padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 500;
+}
+
+/* ---- Availability notice (closed day / holiday / clinic disabled) ---- */
+.availability-notice {
+  background: #fff4e0; color: #8a5a00; border: 1px solid #f5dca0;
+  padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 500;
+}
+
+/* ---- Success screen: warning variant (mailto fallback) ---- */
+.success-check.is-warn { background: var(--gold); box-shadow: 0 0 0 8px #fdf0cf; }
+.ref-box.is-warn { color: #b67d0a; background: #fff6e0; border-color: var(--gold); }
+
+/* ---- Success screen ---- */
+.booking-success { display: grid; place-items: center; min-height: 460px; }
+.success-card {
+  max-width: 560px; text-align: center; background: #fff;
+  border: 1px solid #eef2ee; border-radius: var(--radius-lg);
+  padding: 40px 32px; box-shadow: var(--shadow);
+  animation: fadeUp 0.45s ease both;
+}
+.success-check {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--green-600); color: #fff;
+  display: grid; place-items: center; margin: 0 auto 18px;
+  font-size: 2rem; box-shadow: 0 0 0 8px var(--green-100);
+}
+.ref-box {
+  font-family: var(--font-head); font-weight: 700; font-size: 1.4rem;
+  letter-spacing: 0.05em; color: var(--green-700);
+  background: var(--green-50); border: 1px dashed var(--green-500);
+  padding: 10px; border-radius: 10px; margin: 12px 0 22px;
+}
+.confirm-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  text-align: left; margin-bottom: 24px;
+}
+.confirm-grid > div {
+  background: var(--cream); border-radius: 10px; padding: 12px 14px;
+}
+.confirm-grid small { display: block; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-500); }
+.confirm-grid strong { font-family: var(--font-head); color: var(--ink-900); }
+.success-next { text-align: left; background: var(--green-50); border-radius: 12px; padding: 18px 22px; margin-bottom: 22px; }
+.success-next h4 { margin: 0 0 8px; color: var(--green-700); }
+.success-next ol { margin: 0; padding-left: 18px; color: var(--ink-700); }
+.success-actions { display: flex; flex-direction: column; gap: 10px; }
+.disclaimer { font-size: 0.78rem; color: var(--ink-500); margin-top: 16px; }
+
+@media (max-width: 920px) {
+  .booking-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+@media (max-width: 640px) {
+  .form-clinic-tabs { grid-template-columns: 1fr; }
+  .booking-cta-card { padding: 22px; }
+  .booking-cta-card .hours-quick div { flex-wrap: wrap; gap: 2px 10px; }
+  .success-card { padding: 28px 20px; }
+  .success-actions .btn { width: 100%; }
+}
+
+@media (max-width: 540px) {
+  .confirm-grid { grid-template-columns: 1fr; }
+  .booking-success { min-height: 0; }
+  .ref-box { font-size: 1.15rem; letter-spacing: 0.03em; }
+  /* Slot buttons: smaller minimum so 3 fit per row on a 320px screen
+     instead of 2 with a wide gap. */
+  .time-slot-grid { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
+  .form-clinic-locked { font-size: 1.2rem; padding: 12px 14px; }
+}

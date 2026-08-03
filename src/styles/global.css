@@ -1,0 +1,239 @@
+/* =====================================================================
+   Walk In GP — Global styles
+   Green theme inspired by walkingp.ie
+   ===================================================================== */
+
+:root {
+  /* Brand palette — clinical green */
+  --green-900: #14532d;
+  --green-700: #1f7a3e;
+  --green-600: #259649;
+  --green-500: #2fb457;
+  --green-100: #e7f5ec;
+  --green-50:  #f3faf6;
+
+  --ink-900: #0f1f17;
+  --ink-700: #29413a;
+  --ink-500: #5b6b63;
+  --ink-300: #9aa8a1;
+
+  --cream:    #f7f9f6;
+  --white:    #ffffff;
+  --gold:     #f4b740;
+  --danger:   #d64545;
+  --success:  #1f7a3e;
+
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 22px;
+  --shadow-sm: 0 1px 2px rgba(16, 40, 28, 0.06), 0 1px 3px rgba(16, 40, 28, 0.08);
+  --shadow:    0 10px 30px rgba(16, 40, 28, 0.08);
+  --shadow-lg: 0 24px 60px rgba(16, 40, 28, 0.14);
+
+  --container: 1180px;
+  --gutter: 20px;
+  --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-head: 'Poppins', var(--font-body);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Belt-and-braces: nothing should ever produce a sideways scrollbar.
+     Individual overflow causes are fixed at source; this catches the rest.
+     Fallback for browsers without `clip` — see the rule below. */
+  overflow-x: hidden;
+}
+
+/* `clip` rather than `hidden`: `hidden` turns the element into a scroll
+   container, which silently kills `position: sticky` on the site header.
+   `clip` crops the same overflow without that side effect. Browsers that
+   don't understand it fall back to `overflow-x: hidden` on <html> only,
+   where sticky still works. */
+html, body { overflow-x: clip; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background: var(--white);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Long unbroken strings (emails, URLs, phone numbers) must not push the
+   layout wider than the screen. */
+body { overflow-wrap: break-word; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  color: var(--ink-900);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); font-weight: 800; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+
+p { margin: 0 0 1rem; color: var(--ink-700); font-size: 1.05rem; line-height: 1.7; }
+
+a { color: var(--green-700); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+section { padding-block: clamp(56px, 8vw, 96px); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  /* Wrap rather than overflow: a nowrap button contributes its full text
+     width as min-content and drags the whole layout wider on phones. */
+  max-width: 100%;
+  text-align: center;
+  min-height: 44px;   /* comfortable tap target */
+}
+.btn:hover { text-decoration: none; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary { background: var(--green-600); color: #fff; box-shadow: var(--shadow-sm); }
+.btn-primary:hover { background: var(--green-700); }
+
+.btn-light { background: #fff; color: var(--green-700); }
+.btn-light:hover { background: var(--green-50); }
+
+.btn-outline { background: transparent; color: var(--green-700); border-color: var(--green-600); }
+.btn-outline:hover { background: var(--green-50); }
+
+.btn-ghost-light { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+.btn-ghost-light:hover { background: rgba(255,255,255,0.12); }
+
+.btn-block { width: 100%; }
+.btn-lg { padding: 16px 32px; font-size: 1.05rem; }
+
+/* ---------- Eyebrow / pills ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  background: var(--green-100);
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--green-50);
+  color: var(--green-700);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--green-100);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: #fff;
+  border: 1px solid #eef2ee;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green-100); }
+
+/* ---------- Section heading ---------- */
+.section-head { max-width: 720px; margin-bottom: 48px; }
+.section-head.center { margin-inline: auto; text-align: center; }
+.section-head p { font-size: 1.08rem; }
+
+/* ---------- Utility ---------- */
+.text-center { text-align: center; }
+.muted { color: var(--ink-500); }
+.bg-cream { background: var(--cream); }
+.bg-green-soft { background: var(--green-50); }
+
+.grid { display: grid; gap: 24px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Grid/flex children default to min-width:auto, so any wide child (a table,
+   a row of selects, a long word) refuses to shrink and blows the track out
+   past the viewport. Allowing them to shrink is what makes the columns
+   actually responsive. */
+.grid > *, .booking-grid > *, .footer-grid > * { min-width: 0; }
+
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ---------- Small phones (iPhone SE / 320–380px) ---------- */
+@media (max-width: 380px) {
+  :root { --gutter: 16px; }
+  body { font-size: 0.97rem; }
+  .card { padding: 20px; }
+  .btn { padding: 13px 20px; font-size: 0.95rem; }
+  .btn-lg { padding: 15px 22px; font-size: 1rem; }
+  .section-head { margin-bottom: 32px; }
+}
+
+/* ---------- Touch devices: no hover-lift, bigger targets ---------- */
+@media (hover: none) {
+  .btn:hover, .card:hover, .clinic-card:hover, .service-card:hover {
+    transform: none;
+  }
+  a, button { -webkit-tap-highlight-color: rgba(31, 122, 62, 0.15); }
+}
+
+/* ---------- Landscape phones: reclaim vertical space ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  section { padding-block: 40px; }
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { animation: fadeUp 0.6s ease both; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
