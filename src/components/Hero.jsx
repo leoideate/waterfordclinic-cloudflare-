@@ -1,4 +1,5 @@
-import { useClinic } from '../context/ClinicContext.jsx'
+import { useClinic, isSingleClinic } from '../context/ClinicContext.jsx'
+import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 
 /* Full-bleed professional healthcare photo for the hero background.
@@ -9,7 +10,9 @@ const HERO_BG_URL =
   'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=2000&q=80&auto=format&fit=crop'
 
 export default function Hero() {
-  const { activeClinicKey, setBookingOpenFor } = useClinic()
+  const { activeClinicKey, setBookingOpenFor, clinics } = useClinic()
+  const clinicList = Object.values(clinics)
+  const single = isSingleClinic
 
   /**
    * Hero clinic tab click — single source of truth for "open booking".
@@ -40,58 +43,54 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <div className="hero-content">
-          <span className="eyebrow eyebrow-light">🩺 Walk-in GP • Tullamore &amp; Kildare</span>
+          <span className="eyebrow eyebrow-light">🩺 Walk-in &amp; out-of-hours GP • Waterford</span>
 
           <h1>
             See a doctor <span className="hl">today</span>.<br />
-            Book your <span className="hl">Walk In GP</span> appointment online.
+            Book your <span className="hl">{site.brand}</span> appointment online.
           </h1>
 
           <p className="hero-lead">
-            Friendly, professional walk-in general practice in the heart of Tullamore and
-            Kildare. Choose your clinic below to start your booking, or simply walk in and be seen.
+            Urgent medical care and out-of-hours GP services in Waterford, for when your
+            own doctor is closed. Book a time below, or simply walk in and be seen.
           </p>
 
-          {/* ---- Trust strip ---- */}
+          {/* ---- Trust strip ----
+               Only claims we can actually stand over. Opening hours and any
+               wait-time or fee claim stay out until the client confirms them. */}
           <div className="hero-trust">
-            <div className="trust-item"><strong>Open Mon–Sat</strong><span>Walk-ins welcome</span></div>
-            <div className="trust-item"><strong>Private GP service</strong><span>Consultation fee €60</span></div>
-            <div className="trust-item"><strong>&lt; 15 min</strong><span>Average wait</span></div>
+            <div className="trust-item"><strong>Walk-ins welcome</strong><span>No appointment needed</span></div>
+            <div className="trust-item"><strong>Out-of-hours</strong><span>Beyond 9-to-5 cover</span></div>
+            <div className="trust-item"><strong>Minor injuries</strong><span>Treated on site</span></div>
             <div className="trust-item"><strong>Irish Medical Council</strong><span>Registered doctors</span></div>
           </div>
 
-          {/* ---- Clinic booking tabs (the only CTAs in the hero) ----
-               Two large green buttons with gold text. Clicking one selects
-               that clinic AND smooth-scrolls to the #booking section, where
-               the form is locked to the chosen clinic. */}
-          <div className="clinic-tabs" role="tablist" aria-label="Choose your clinic to book">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeClinicKey === 'tullamore'}
-              className={`clinic-tab ${activeClinicKey === 'tullamore' ? 'is-active' : ''}`}
-              onClick={() => pickClinic('tullamore', 'hero_tab')}
-            >
-              <span className="ct-icon" aria-hidden="true">📅</span>
-              <span>
-                <strong>Book Appointment for Tullamore Clinic</strong>
-                <small>Tap to choose &amp; book</small>
-              </span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeClinicKey === 'kildare'}
-              className={`clinic-tab ${activeClinicKey === 'kildare' ? 'is-active' : ''}`}
-              onClick={() => pickClinic('kildare', 'hero_tab')}
-            >
-              <span className="ct-icon" aria-hidden="true">📅</span>
-              <span>
-                <strong>Book Appointment for Kildare Clinic</strong>
-                <small>Tap to choose &amp; book</small>
-              </span>
-            </button>
+          {/* ---- Booking CTA(s) — the only calls to action in the hero ----
+               Rendered from the clinics data rather than hardcoded per
+               location, so a single-site practice gets one clear button and
+               a multi-site one gets a tab each, with no code change.
+               Clicking reveals #booking with the form locked to that clinic. */}
+          <div
+            className={`clinic-tabs ${single ? 'is-single' : ''}`}
+            role={single ? undefined : 'tablist'}
+            aria-label={single ? undefined : 'Choose your clinic to book'}
+          >
+            {clinicList.map(c => (
+              <button
+                key={c.key}
+                type="button"
+                role={single ? undefined : 'tab'}
+                aria-selected={single ? undefined : activeClinicKey === c.key}
+                className={`clinic-tab ${!single && activeClinicKey === c.key ? 'is-active' : ''}`}
+                onClick={() => pickClinic(c.key, 'hero_tab')}
+              >
+                <span className="ct-icon" aria-hidden="true">📅</span>
+                <span>
+                  <strong>{single ? 'Book an Appointment' : `Book Appointment for ${c.name} Clinic`}</strong>
+                  <small>{single ? 'Pick a date and time' : 'Tap to choose & book'}</small>
+                </span>
+              </button>
+            ))}
           </div>
 
           {/* ---- Secondary link (kept minimal per spec) ---- */}
@@ -110,7 +109,7 @@ export default function Hero() {
           overflow: hidden;
           padding-block: clamp(80px, 10vw, 120px);
           /* Fallback background in case the image is blocked/slow */
-          background: radial-gradient(120% 120% at 80% -10%, #1c6e37 0%, #14552d 55%, #0e3f22 100%);
+          background: radial-gradient(120% 120% at 80% -10%, var(--green-600) 0%, var(--green-800) 55%, var(--green-900) 100%);
         }
 
         /* ---- Full-bleed background image ---- */
@@ -202,6 +201,10 @@ export default function Hero() {
           width: 100%;
           max-width: 820px;
         }
+        /* One location: a single centred CTA rather than a lone tab stretched
+           across the full tab row. */
+        .clinic-tabs.is-single { max-width: 460px; }
+        .clinic-tabs.is-single .clinic-tab { width: 100%; justify-content: center; }
         .clinic-tab {
           /* Larger, more clickable surface */
           display: inline-flex;
@@ -211,9 +214,11 @@ export default function Hero() {
           padding: 18px 28px;
           border-radius: var(--radius);
 
-          /* Green tab to match the hero theme. Slightly deeper green so the
-             gold text pops (matching the gold in the hero heading). */
-          background: linear-gradient(180deg, #1f7a3e 0%, #14552d 100%);
+          /* Brand-coloured tab, deep enough that the gold text pops
+             (matching the gold used in the hero heading). Driven by the
+             --green-* variables (teal for this client) so this stays in
+             sync with the rest of the palette, not a one-off hex pair. */
+          background: linear-gradient(180deg, var(--green-700) 0%, var(--green-800) 100%);
           color: #ffe9a8;   /* gold/yellow text, matches the hero heading tone */
 
           border: 2px solid rgba(255, 233, 168, 0.35);
@@ -229,7 +234,7 @@ export default function Hero() {
           transform: translateY(-3px);
           border-color: rgba(255, 233, 168, 0.7);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.36);
-          background: linear-gradient(180deg, #258a47 0%, #196236 100%);
+          background: linear-gradient(180deg, var(--green-600) 0%, var(--green-700) 100%);
         }
         .clinic-tab:focus-visible {
           outline: 3px solid #ffe9a8;
@@ -241,7 +246,7 @@ export default function Hero() {
         .clinic-tab.is-active {
           border-color: #ffe9a8;
           box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px #ffe9a8 inset;
-          background: linear-gradient(180deg, #2a9a50 0%, #1a6e3c 100%);
+          background: linear-gradient(180deg, var(--green-500) 0%, var(--green-600) 100%);
         }
 
         .ct-icon {

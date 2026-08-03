@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useClinic } from '../context/ClinicContext.jsx'
+import { useClinic, isSingleClinic } from '../context/ClinicContext.jsx'
+import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 
 /** Scroll to an element by id, accounting for the sticky header height. */
@@ -12,7 +13,8 @@ function scrollToId(id) {
 }
 
 export default function Header() {
-  const { activeClinicKey, setBookingOpenFor } = useClinic()
+  const { activeClinicKey, setBookingOpenFor, clinics } = useClinic()
+  const clinicList = Object.values(clinics)
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -45,18 +47,18 @@ export default function Header() {
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container header-inner">
-        {/* --- Brand: Walk In GP --- */}
+        {/* --- Brand --- */}
         <button
           type="button"
           className="brand"
           onClick={() => { close(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-          aria-label="Walk In GP home"
+          aria-label={`${site.brand} home`}
         >
           <span className="brand-mark" aria-hidden="true">
-            <img src="/logo-transparent.png" alt="" width="210" height="62" />
+            <img src={site.logo.header} alt="" width="210" height="62" />
           </span>
           <span className="brand-text">
-            <small>Tullamore · Kildare</small>
+            <small>{site.tagline}</small>
           </span>
         </button>
 
@@ -74,23 +76,21 @@ export default function Header() {
             </button>
           ))}
 
-          {/* Button-style clinic tabs — green outline, distinct from text nav */}
-          <button
-            type="button"
-            className={`nav-clinic-btn ${activeClinicKey === 'tullamore' ? 'is-current' : ''}`}
-            onClick={() => goClinic('tullamore')}
-            aria-pressed={activeClinicKey === 'tullamore'}
-          >
-            <span aria-hidden="true">📍</span> Tullamore Clinic
-          </button>
-          <button
-            type="button"
-            className={`nav-clinic-btn ${activeClinicKey === 'kildare' ? 'is-current' : ''}`}
-            onClick={() => goClinic('kildare')}
-            aria-pressed={activeClinicKey === 'kildare'}
-          >
-            <span aria-hidden="true">📍</span> Kildare Clinic
-          </button>
+          {/* Booking CTA(s) — one per location. With a single clinic this
+              is a plain "Book Appointment" button rather than a location
+              picker, since there is nothing to pick between. */}
+          {clinicList.map(c => (
+            <button
+              key={c.key}
+              type="button"
+              className={`nav-clinic-btn ${!isSingleClinic && activeClinicKey === c.key ? 'is-current' : ''}`}
+              onClick={() => goClinic(c.key)}
+              aria-pressed={isSingleClinic ? undefined : activeClinicKey === c.key}
+            >
+              <span aria-hidden="true">{isSingleClinic ? '📅' : '📍'}</span>{' '}
+              {isSingleClinic ? 'Book Appointment' : `${c.name} Clinic`}
+            </button>
+          ))}
         </nav>
 
         <button
@@ -165,7 +165,10 @@ export default function Header() {
           box-shadow: 0 4px 12px rgba(20, 83, 45, 0.28);
         }
         .nav-clinic-btn.is-current:hover {
-          background: var(--green-800, #0e3f22);
+          /* --green-800 is now a real variable in global.css, so this
+             always resolves from the palette — no hardcoded fallback hex
+             left over from before that shade existed. */
+          background: var(--green-800);
           color: #ffe9a8;
         }
 
@@ -206,8 +209,8 @@ export default function Header() {
           }
         }
 
-        /* Narrow phones: the wordmark + "Tullamore · Kildare" + burger no
-           longer fit side by side, so scale the logo and drop the strapline. */
+        /* Narrow phones: the wordmark + tagline + burger no longer fit
+           side by side, so scale the logo and drop the strapline. */
         @media (max-width: 480px) {
           .header-inner { min-height: 64px; }
           .brand-mark img { height: 40px; }

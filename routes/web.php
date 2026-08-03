@@ -13,21 +13,15 @@ Route::get('/up', fn () => response('OK'))->name('up');
 |--------------------------------------------------------------------------
 | Standalone SEO landing pages
 |--------------------------------------------------------------------------
-| Server-rendered Blade pages (not part of the React SPA) so Google gets
-| real, distinct, crawlable HTML per location/topic instead of just the
-| homepage shell. Must be registered BEFORE the SPA catch-all below.
+| The previous client registered one server-rendered HTML page per clinic
+| location here, so Google got real crawlable content per location instead
+| of the SPA shell. Waterford Clinic is a single site, so there are no
+| location pages — the homepage IS the location page.
+|
+| If topic landing pages are added later (e.g. /minor-injuries or
+| /sick-certificates to match service-level ad groups), register them here
+| BEFORE the SPA catch-all below, and add them to public/sitemap.xml.
 */
-Route::get('/kildare', fn () => response(
-    file_get_contents(resource_path('views/kildare.html')),
-    200,
-    ['Content-Type' => 'text/html; charset=UTF-8']
-))->name('kildare');
-
-Route::get('/tullamore', fn () => response(
-    file_get_contents(resource_path('views/tullamore.html')),
-    200,
-    ['Content-Type' => 'text/html; charset=UTF-8']
-))->name('tullamore');
 
 /*
 |--------------------------------------------------------------------------
@@ -45,11 +39,10 @@ Route::get('/tullamore', fn () => response(
 | reaches the Laravel API controllers and is NOT swallowed here.
 */
 Route::get('/{any}', function (string $any = '') {
-    // Only the SPA root and everything under /admin are real routes —
-    // the rest of the public site navigates via #anchors on the
-    // homepage, and /kildare was already claimed above. Anything else
-    // is a broken/unknown URL and must return a real 404, not a
-    // soft-404 copy of the homepage (which confuses Google's indexer
+    // Only the SPA root and everything under /admin are real routes — the
+    // rest of the public site navigates via #anchors on the homepage.
+    // Anything else is a broken/unknown URL and must return a real 404,
+    // not a soft-404 copy of the homepage (which confuses Google's indexer
     // and can surface old dead links as "duplicate content").
     if ($any !== '' && ! str_starts_with($any, 'admin')) {
         abort(404);

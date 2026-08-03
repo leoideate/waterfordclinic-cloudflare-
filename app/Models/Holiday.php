@@ -22,10 +22,14 @@ class Holiday extends Model
         'end_time' => 'string',
     ];
 
+    /**
+     * The platform supports per-clinic scoping for multi-location clients
+     * (see the original two-clinic build). Waterford Clinic is a single
+     * location, so 'both' is really "the clinic" — kept as the key so
+     * affects() and the admin UI need no special-casing for one location.
+     */
     public const SCOPES = [
-        'both' => 'Both clinics',
-        'tullamore' => 'Tullamore only',
-        'kildare' => 'Kildare only',
+        'both' => 'Waterford Clinic',
     ];
 
     /** Does this holiday affect the given clinic slug? */

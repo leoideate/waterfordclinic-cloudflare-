@@ -37,10 +37,10 @@ class AppointmentConfirmed extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address(
-                config('mail.from.address', 'info@walkingp.ie'),
-                config('mail.from.name', 'Walk In GP')
+                config('mail.from.address', 'info@waterfordclinic.ie'),
+                config('mail.from.name', config('app.name'))
             ),
-            subject: 'Your Walk In GP appointment confirmation — ' . $this->appointment->reference,
+            subject: 'Your ' . config('app.name') . ' appointment confirmation — ' . $this->appointment->reference,
         );
     }
 
@@ -51,6 +51,7 @@ class AppointmentConfirmed extends Mailable implements ShouldQueue
         return new Content(
             html: 'emails.booking-confirmed',
             with: [
+                'brand'         => config('app.name'),
                 'firstName'     => $a->first_name,
                 'lastName'      => $a->last_name,
                 'reference'     => $a->reference,
@@ -60,6 +61,10 @@ class AppointmentConfirmed extends Mailable implements ShouldQueue
                 'date'          => optional($a->preferred_date)->format('l j F Y'),
                 'time'          => $a->preferred_time ? substr((string) $a->preferred_time, 0, 5) : '—',
                 'service'       => $a->service,
+                // Deliberately unset until confirmed with the client — see
+                // src/config/site.js for the same rule on the public site.
+                'consultationFee' => null,
+                'acceptsMedicalCard' => null,
             ],
         );
     }

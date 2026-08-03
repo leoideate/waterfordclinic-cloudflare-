@@ -1,16 +1,29 @@
 /* =====================================================================
-   Walk In GP — Global styles
-   Green theme inspired by walkingp.ie
+   Waterford Clinic — Global styles
+   ---------------------------------------------------------------------
+   Teal theme, matching src/config/site.js theme.primary (#1f6f8b).
+
+   ⚠️  The --green-* variable NAMES are unchanged from the platform
+       template on purpose — every component's <style> block references
+       them, so renaming the variables would mean touching every
+       component file for a purely cosmetic reason. Only the HEX VALUES
+       below need to change to re-skin the site; keep them in sync with
+       site.js.theme by hand, since CSS custom properties can't import a
+       JS module at runtime.
    ===================================================================== */
 
 :root {
-  /* Brand palette — clinical green */
-  --green-900: #14532d;
-  --green-700: #1f7a3e;
-  --green-600: #259649;
-  --green-500: #2fb457;
-  --green-100: #e7f5ec;
-  --green-50:  #f3faf6;
+  /* Brand palette — teal (Waterford Clinic)
+     --green-800 sits between 900 and 700 — it exists because a few
+     components (hero gradient, admin login background) need a third
+     stop darker than the primary but lighter than the darkest shade. */
+  --green-900: #123c4a;
+  --green-800: #17526a;
+  --green-700: #1f6f8b;
+  --green-600: #25839f;
+  --green-500: #2ea0c2;
+  --green-100: #e3f2f6;
+  --green-50:  #f2f9fb;
 
   --ink-900: #0f1f17;
   --ink-700: #29413a;
@@ -19,9 +32,9 @@
 
   --cream:    #f7f9f6;
   --white:    #ffffff;
-  --gold:     #f4b740;
+  --gold:     #e8a33d;
   --danger:   #d64545;
-  --success:  #1f7a3e;
+  --success:  #1f6f8b;
 
   --radius-sm: 8px;
   --radius:    14px;
@@ -186,6 +199,10 @@ section { padding-block: clamp(56px, 8vw, 96px); }
 .bg-green-soft { background: var(--green-50); }
 
 .grid { display: grid; gap: 24px; }
+/* .grid-1 has no rule body — a single grid item already fills the row with
+   no template needed. Declared explicitly (rather than just omitting the
+   class) so it documents intent for a single-clinic site alongside 2/3/4. */
+.grid-1 { grid-template-columns: 1fr; max-width: 640px; margin-inline: auto; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }

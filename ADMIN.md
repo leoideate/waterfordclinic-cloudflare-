@@ -1,4 +1,4 @@
-# 🛠️ Walk In GP — Admin Dashboard Guide
+# 🛠️ Waterford Clinic — Admin Dashboard Guide
 
 A full admin CMS for managing appointments, clinic availability, break times, holidays, temporary closures, admin users, and settings — all of which **directly control the public booking form**.
 
@@ -51,7 +51,7 @@ The login page detects this automatically and shows the right fix. You can also 
 ### 📊 Dashboard
 - New/active appointments today, counts by status.
 - Live booking status per clinic (Open / Disabled).
-- Next 10 upcoming appointments across both clinics.
+- Next 10 upcoming appointments.
 
 ### 🗓️ Appointments
 - **Search** by patient name, phone, email, or reference.
@@ -83,20 +83,21 @@ During a break, the affected time slots disappear from the public form.
 ### 📅 Holidays / Closures
 Block public holidays or any closure date:
 - Name + date
-- Clinic affected: Both / Tullamore / Kildare
 - **Full day** or **specific time window**
 - Optional notes
 
-When blocked, the public form rejects that date for the affected clinic(s).
+When blocked, the public form rejects that date.
 
 ### 🚧 Temporary Closures
 Ad-hoc closures for full days, half days, custom date ranges, or specific time windows:
-- Clinic (or both)
 - Start date + optional end date (range)
 - Full day(s) or specific time window
 - Reason + internal notes
 
-Examples this handles: *"Tullamore closed 12 Aug 1pm–3pm"*, *"Kildare closed Friday 9am–12pm"*, *"Both clinics closed on a public holiday"*, *"Doctor unavailable 2:30pm–4pm"*.
+Examples this handles: *"Closed 12 Aug 1pm–3pm"*, *"Closed on a public holiday"*, *"Doctor unavailable 2:30pm–4pm"*.
+
+(A multi-location clinic would additionally pick which location a closure
+applies to — see `App\Models\Holiday::SCOPES` and `TemporaryClosure`.)
 
 During a closure, slots are hidden and a booked slot returns:
 > *"Appointments are not available during this time. Please select another time."*
@@ -209,8 +210,8 @@ MAIL_HOST=smtp.mailtrap.io     # or your SMTP host
 MAIL_PORT=2525
 MAIL_USERNAME=…
 MAIL_PASSWORD=…
-MAIL_FROM_ADDRESS=reception@walkingp.ie
-MAIL_FROM_NAME="Walk In GP"
+MAIL_FROM_ADDRESS=info@waterfordclinic.ie
+MAIL_FROM_NAME="Waterford Clinic"
 ```
 
 For local dev, `MAIL_MAILER=log` writes the email to `storage/logs/laravel.log` — handy for testing without an SMTP server.

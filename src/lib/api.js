@@ -1,9 +1,9 @@
 /* =====================================================================
-   Walk In GP — tiny API client
+   Waterford Clinic — tiny API client
    ---------------------------------------------------------------------
    - In dev, Vite proxies "/api/*" to the Laravel server (see vite.config.js),
      so the frontend just calls "/api/...".
-   - In production, set VITE_API_BASE (e.g. https://api.walkingp.ie) and the
+   - In production, set VITE_API_BASE (e.g. https://api.waterfordclinic.ie) and the
      same code points there.
    ===================================================================== */
 

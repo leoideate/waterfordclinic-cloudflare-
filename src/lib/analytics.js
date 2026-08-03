@@ -1,8 +1,8 @@
 /* =====================================================================
-   Walk In GP — Analytics helper
+   Analytics helper
    ---------------------------------------------------------------------
    One small API for the whole app to fire tracking events. Components
-   call e.g. `track.bookingSuccess({ clinic: 'tullamore', ref: 'WIGP-…' })`
+   call e.g. `track.bookingSuccess({ clinic: 'waterford', ref: 'WC-…' })`
    and this helper:
 
      1. pushes a clean GA4-style event to the GTM dataLayer
@@ -90,12 +90,12 @@ export const track = {
     trackEvent(EVENTS.BOOK_APPOINTMENT_CLICK, { location, link_class: 'primary_cta' })
   },
 
-  /** Clinic tab/link selected. */
+  /** Clinic tab/link selected.
+   *  One event name with the clinic as a parameter, rather than a separate
+   *  hardcoded event per location — so adding or renaming a clinic doesn't
+   *  need a code change, and GA4 can segment on the `clinic` dimension. */
   clinicSelected(clinicKey, location = 'unknown') {
-    const event = clinicKey === 'tullamore'
-      ? EVENTS.TULLAMORE_CLINIC_SELECTED
-      : EVENTS.KILDARE_CLINIC_SELECTED
-    trackEvent(event, { clinic: clinicKey, location })
+    trackEvent(EVENTS.CLINIC_SELECTED, { clinic: clinicKey, location })
   },
 
   /** Phone number clicked/tapped. */

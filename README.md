@@ -1,6 +1,8 @@
-# TWL Clinic — Walk-in GP (Tullamore & Kildare)
+# Waterford Clinic — Walk-in & Out-of-Hours GP
 
-A revamped site for a walk-in GP practice with **two locations** (Tullamore and Kildare) and a built-in **online patient booking** flow that saves bookings to a **Laravel + SQLite** database. Content and look are adapted from the original walkingp.ie site.
+A site for Waterford Clinic, a **single-location** walk-in GP practice, with a built-in **online patient booking** flow that saves bookings to a **Laravel + SQLite** database.
+
+This is a fork of a multi-clinic booking platform originally built for a two-location practice (Tullamore & Kildare). The frontend and backend both support one clinic or several — see `src/context/ClinicContext.jsx` (`isSingleClinic`) and `App\Models\Holiday::SCOPES` for where that adapts. Brand-level settings (name, domain, colours, analytics IDs) live in `src/config/site.js`; anything below that still reads like generic platform documentation applies to both cases.
 
 **Stack:** React 18 + Vite (frontend) · Laravel 11 + SQLite (backend API).
 
@@ -32,7 +34,7 @@ See [`backend/README.md`](backend/README.md) for API details, switching to MySQL
 
 ## ✨ What's included
 
-- **Hero with two clinic tabs** — Tullamore Clinic / Kildare Clinic. Tapping a tab switches the active clinic across the whole site (hero card, header phone, booking form, contact section).
+- **Hero booking CTA** — a single "Book an Appointment" button (Waterford Clinic has one location). The same component renders a clinic tab per location instead when `clinics` in `siteData.js` has more than one entry.
 - **Online booking form** — clinic-aware, with:
   - Clinic chooser (synced with the hero tabs)
   - Name, phone, email, DOB, existing-patient, service, date, time, notes

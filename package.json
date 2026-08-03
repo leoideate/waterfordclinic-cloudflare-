@@ -1,9 +1,9 @@
 {
-  "name": "twl-clinic",
+  "name": "waterford-clinic",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "TWL Clinic — Tullamore & Kildare. Revamped walk-in GP clinic site with online patient booking.",
+  "description": "Waterford Clinic — walk-in and out-of-hours GP clinic site with online patient booking.",
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.js",

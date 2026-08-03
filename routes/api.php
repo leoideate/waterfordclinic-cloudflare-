@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| PUBLIC API — Walk In GP booking + availability
+| PUBLIC API — Waterford Clinic booking + availability
 |--------------------------------------------------------------------------
 */
 Route::get('/clinics', [ClinicController::class, 'index']);

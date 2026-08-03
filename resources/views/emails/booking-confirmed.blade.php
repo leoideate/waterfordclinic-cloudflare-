@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Walk In GP appointment confirmation</title>
+    <title>Your {{ $brand }} appointment confirmation</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f6f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:{{ $ink }};">
 
@@ -31,7 +31,7 @@
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="font-size:20px;font-weight:800;color:#ffffff;letter-spacing:-0.01em;">
-                                        Walk In GP
+                                        {{ $brand }}
                                     </td>
                                     <td align="right" style="font-size:12px;color:#c8f0d3;text-transform:uppercase;letter-spacing:0.1em;">
                                         Appointment confirmed
@@ -85,21 +85,30 @@
                                 @endif
                             </table>
 
-                            {{-- Important notice --}}
+                            {{-- Fee / medical-card notice — omitted until the client
+                                 confirms their pricing. An invented fee in a patient's
+                                 inbox is worse than no notice at all. --}}
+                            @if (! empty($consultationFee))
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:{{ $amberBg }};border:1px solid {{ $amberBd }};border-left:4px solid {{ $amberBd }};border-radius:8px;margin:6px 0 18px 0;">
                                 <tr>
                                     <td style="padding:14px 18px;font-size:14px;line-height:1.5;color:{{ $amberInk }};">
                                         <strong style="color:#6e4f06;">⚠️ Please note:</strong>
-                                        Medical Cards and GMS are not accepted at Walk In GP.
-                                        The consultation fee is <strong>€60</strong>, payable on the day.
+                                        @if ($acceptsMedicalCard === false)
+                                            Medical Cards and GMS are not accepted at {{ $brand }}.
+                                        @endif
+                                        The consultation fee is <strong>{{ $consultationFee }}</strong>, payable on the day.
                                     </td>
                                 </tr>
                             </table>
+                            @endif
 
+                            {{-- Opening hours are not stated here — they are not yet
+                                 confirmed by the client (see siteData.js) and this
+                                 template previously carried the PREVIOUS client's
+                                 real hours, which would have misled patients. --}}
                             <p style="margin:0 0 8px 0;font-size:14px;line-height:1.6;color:{{ $ink }};">
                                 Need to change or cancel your booking? Just call us on
-                                <a href="tel:{{ $clinicPhone }}" style="color:{{ $green }};text-decoration:none;font-weight:600;">{{ $clinicPhone }}</a>
-                                during opening hours (Mon–Fri 8:00–19:00, Sat 9:00–14:00).
+                                <a href="tel:{{ $clinicPhone }}" style="color:{{ $green }};text-decoration:none;font-weight:600;">{{ $clinicPhone }}</a>.
                             </p>
                         </td>
                     </tr>
@@ -108,11 +117,11 @@
                     <tr>
                         <td style="padding:22px 28px 28px 28px;border-top:1px solid #eef2ee;background:#fafbfa;">
                             <p style="margin:0 0 6px 0;font-size:12px;line-height:1.5;color:{{ $muted }};">
-                                This confirmation was sent because an appointment was booked at Walk In GP.
+                                This confirmation was sent because an appointment was booked at {{ $brand }}.
                                 If you didn't make this booking, please call the clinic on {{ $clinicPhone }}.
                             </p>
                             <p style="margin:0;font-size:12px;color:{{ $muted }};">
-                                © {{ date('Y') }} Walk In GP · Tullamore &amp; Kildare, Ireland
+                                © {{ date('Y') }} {{ $brand }} · Waterford, Ireland
                             </p>
                         </td>
                     </tr>
@@ -120,7 +129,7 @@
 
                 {{-- Subtle preheader-style spacer note --}}
                 <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
-                    <tr><td style="padding:14px 0;text-align:center;font-size:11px;color:#9aa7a0;">Walk In GP — booking confirmation</td></tr>
+                    <tr><td style="padding:14px 0;text-align:center;font-size:11px;color:#9aa7a0;">{{ $brand }} — booking confirmation</td></tr>
                 </table>
 
             </td>

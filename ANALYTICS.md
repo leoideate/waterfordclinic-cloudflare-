@@ -1,4 +1,4 @@
-# 📊 Analytics & Tracking Setup — Walk In GP
+# 📊 Analytics & Tracking Setup — Waterford Clinic
 
 This site is fully wired for marketing analytics through **Google Tag Manager (GTM)**. All tracking IDs live in **one file**; all events fire through a single helper. Nothing is hardcoded across components.
 
@@ -55,8 +55,7 @@ Every user action fires one of these events to the `dataLayer` (and to GA4/gtag 
 | Event name | Fired when | Key params |
 |---|---|---|
 | `book_appointment_click` | Any "Book Appointment" / "Book now" button | `location` |
-| `tullamore_clinic_selected` | Tullamore tab/link chosen | `location` |
-| `kildare_clinic_selected` | Kildare tab/link chosen | `location` |
+| `clinic_selected` | A clinic tab/link was chosen | `clinic`, `location` |
 | `phone_call_click` | A phone number is clicked | `phone`, `clinic`, `location` |
 | `email_click` | An email address is clicked | `email`, `clinic`, `location` |
 | `appointment_form_submit` | Booking form submitted (passes validation) | `clinic`, `service` |

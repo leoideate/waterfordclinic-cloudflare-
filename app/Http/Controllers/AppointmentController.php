@@ -46,7 +46,10 @@ class AppointmentController extends Controller
             if (! $clinic) {
                 return response()->json([
                     'message' => 'Sorry, that clinic is not currently available for online booking.',
-                    'errors'  => ['clinic' => ['Please choose either the Tullamore or Kildare clinic.']],
+                    // Generic on purpose: with one clinic there's nothing to
+                    // "choose between" — this only fires if the clinic slug
+                    // sent by the form doesn't match a seeded, active clinic.
+                    'errors'  => ['clinic' => ['Please refresh the page and try again.']],
                     'reason_code' => 'clinic_not_found',
                 ], 422);
             }

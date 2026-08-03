@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { site } from '../config/site.js'
 import { useAuth } from './context/AuthContext.jsx'
 
 const NAV = [
@@ -28,7 +29,7 @@ export default function AdminLayout({ children }) {
   const { user, logout } = useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const loc = useLocation()
-  const title = TITLES[loc.pathname] || 'Walk In GP Admin'
+  const title = TITLES[loc.pathname] || `${site.brand} Admin`
 
   // Escape closes the mobile drawer
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function AdminLayout({ children }) {
       {/* Mobile top bar with menu toggle */}
       <div className="admin-mobile-bar" style={{ gridColumn: '1 / -1' }}>
         <button onClick={() => setSidebarOpen(o => !o)}>☰ Menu</button>
-        <strong>Walk In GP Admin</strong>
+        <strong>{site.brand} Admin</strong>
       </div>
 
       {/* Tapping outside the drawer closes it — on a phone the sidebar covers
@@ -67,7 +68,7 @@ export default function AdminLayout({ children }) {
             <path d="M16 6v20M6 16h20" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" />
           </svg>
           <div>
-            <strong>Walk In GP</strong>
+            <strong>{site.brand}</strong>
             <small>Admin Dashboard</small>
           </div>
         </div>

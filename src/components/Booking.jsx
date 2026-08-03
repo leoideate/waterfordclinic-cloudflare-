@@ -1,5 +1,6 @@
 import BookingForm from './BookingForm.jsx'
-import { useClinic } from '../context/ClinicContext.jsx'
+import { useClinic, isSingleClinic } from '../context/ClinicContext.jsx'
+import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 import '../styles/booking.css'
 
@@ -16,32 +17,27 @@ export default function Booking() {
         <div className="container">
           <div className="booking-closed-card">
             <span className="eyebrow">Online Booking</span>
-            <h2>Choose your clinic to start your booking</h2>
+            <h2>{isSingleClinic ? 'Start your booking' : 'Choose your clinic to start your booking'}</h2>
             <p className="lead">
-              Pick a clinic below to open the appointment form. Once you submit, you'll receive an
-              email confirmation with your booking reference.
+              {isSingleClinic
+                ? "Tap below to open the appointment form. Once you submit, you'll receive an email confirmation with your booking reference."
+                : "Pick a clinic below to open the appointment form. Once you submit, you'll receive an email confirmation with your booking reference."}
             </p>
             <div className="booking-closed-actions">
-              <button
-                type="button"
-                className="btn btn-primary btn-lg"
-                onClick={() => {
-                  setBookingOpenFor('tullamore')
-                  track.clinicSelected('tullamore', 'booking_closed_card')
-                }}
-              >
-                <span aria-hidden="true">📅</span> Book Appointment for Tullamore Clinic
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary btn-lg"
-                onClick={() => {
-                  setBookingOpenFor('kildare')
-                  track.clinicSelected('kildare', 'booking_closed_card')
-                }}
-              >
-                <span aria-hidden="true">📅</span> Book Appointment for Kildare Clinic
-              </button>
+              {Object.values(clinics).map(c => (
+                <button
+                  key={c.key}
+                  type="button"
+                  className="btn btn-primary btn-lg"
+                  onClick={() => {
+                    setBookingOpenFor(c.key)
+                    track.clinicSelected(c.key, 'booking_closed_card')
+                  }}
+                >
+                  <span aria-hidden="true">📅</span>{' '}
+                  {isSingleClinic ? 'Book an Appointment' : `Book Appointment for ${c.name} Clinic`}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -67,10 +63,16 @@ export default function Booking() {
             </p>
 
             {/* Medical Card / fee notice — shown up-front, matches the form notice */}
-            <div className="booking-fee-banner" role="note">
-              <strong>⚠️ Please note:</strong> Medical Cards and GMS are not accepted at Walk In GP.
-              The consultation fee is <strong>€60</strong>, payable on the day.
-            </div>
+            {/* Fee / medical-card notice. Rendered only once the client has
+                confirmed their policy — a wrong fee on a medical site is worse
+                than no fee at all. See src/config/site.js. */}
+            {site.consultationFee && (
+              <div className="booking-fee-banner" role="note">
+                <strong>⚠️ Please note:</strong>{' '}
+                {site.acceptsMedicalCard === false && `Medical Cards and GMS are not accepted at ${site.brand}. `}
+                The consultation fee is <strong>{site.consultationFee}</strong>, payable on the day.
+              </div>
+            )}
 
             <ul className="booking-benefits">
               <li>
@@ -85,10 +87,12 @@ export default function Booking() {
                 <span className="bi-icon" aria-hidden="true">🔒</span>
                 <span><strong>Private &amp; secure</strong><span className="muted">GDPR-compliant. Your details are only used to arrange your visit.</span></span>
               </li>
-              <li>
-                <span className="bi-icon" aria-hidden="true">💳</span>
-                <span><strong>Consultation fee €60</strong><span className="muted">Private clinic. Medical Cards / GMS not accepted. Pay on the day.</span></span>
-              </li>
+              {site.consultationFee && (
+                <li>
+                  <span className="bi-icon" aria-hidden="true">💳</span>
+                  <span><strong>Consultation fee {site.consultationFee}</strong><span className="muted">Payable on the day.</span></span>
+                </li>
+              )}
             </ul>
 
             <div className="booking-cta-card">

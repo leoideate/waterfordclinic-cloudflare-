@@ -26,9 +26,4 @@ PATIENT NOTES
 ============================================================
 {{ $notes }}
 
-============================================================
-Please note: Medical Cards and GMS are not accepted at Walk In GP.
-The consultation fee is €60, payable on the day.
-============================================================
-
 Review and confirm this appointment in the admin dashboard.

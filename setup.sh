@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Walk In GP - Backend Setup (SAFE / IDEMPOTENT)
+# Waterford Clinic - Backend Setup (SAFE / IDEMPOTENT)
 #
 #  - If the database already exists and has data, it is LEFT UNTOUCHED.
 #    (Existing appointments / settings are never wiped.)
@@ -18,7 +18,7 @@ cd "$(dirname "$0")"
 
 echo ""
 echo "============================================================"
-echo " Walk In GP - Backend Setup"
+echo " Waterford Clinic - Backend Setup"
 echo "============================================================"
 echo ""
 

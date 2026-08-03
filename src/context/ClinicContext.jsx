@@ -3,9 +3,14 @@ import { clinics } from '../data/siteData.js'
 
 const ClinicContext = createContext(null)
 
+/** Keys in declaration order — the first is the default. Derived rather than
+ *  hardcoded so this works for a single-location clinic as well as several. */
+export const clinicKeys = Object.keys(clinics)
+const DEFAULT_CLINIC_KEY = clinicKeys[0]
+export const isSingleClinic = clinicKeys.length === 1
+
 export function ClinicProvider({ children }) {
-  // 'tullamore' or 'kildare' — the active clinic for hero + booking
-  const [activeClinicKey, setActiveClinicKey] = useState('tullamore')
+  const [activeClinicKey, setActiveClinicKey] = useState(DEFAULT_CLINIC_KEY)
 
   // Which clinic the user is currently booking for (null = booking section hidden).
   // Set when a hero/header clinic tab is clicked — reveals the #booking section.
@@ -17,14 +22,17 @@ export function ClinicProvider({ children }) {
 
   const activeClinic = clinics[activeClinicKey]
 
-  // Persist the last chosen clinic across reloads
+  // Persist the last chosen clinic across reloads. Pointless with one
+  // location, so skip it entirely rather than write a constant to storage.
   useEffect(() => {
-    const saved = localStorage.getItem('twl_active_clinic')
+    if (isSingleClinic) return
+    const saved = localStorage.getItem('wc_active_clinic')
     if (saved && clinics[saved]) setActiveClinicKey(saved)
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('twl_active_clinic', activeClinicKey)
+    if (isSingleClinic) return
+    localStorage.setItem('wc_active_clinic', activeClinicKey)
   }, [activeClinicKey])
 
   /**

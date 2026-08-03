@@ -52,13 +52,13 @@ class Appointment extends Model
     }
 
     /**
-     * Readable, hard-to-guess reference: WIGP-XXXXXX (6 alnum chars).
+     * Readable, hard-to-guess reference: WC-XXXXXX (6 alnum chars).
      * Retries on rare collisions.
      */
     public static function generateReference(): string
     {
         do {
-            $ref = 'WIGP-' . strtoupper(Str::random(6));
+            $ref = 'WC-' . strtoupper(Str::random(6));
         } while (static::where('reference', $ref)->exists());
 
         return $ref;

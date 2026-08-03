@@ -1,5 +1,5 @@
 import { clinics } from '../data/siteData.js'
-import { useClinic } from '../context/ClinicContext.jsx'
+import { useClinic, isSingleClinic } from '../context/ClinicContext.jsx'
 import { track } from '../lib/analytics.js'
 
 export default function Contact() {
@@ -10,11 +10,11 @@ export default function Contact() {
       <div className="container">
         <div className="section-head center">
           <span className="eyebrow">Find Us</span>
-          <h2>Two clinics, here when you need us</h2>
-          <p>Walk in or book online, whichever suits you. Both locations are central with parking nearby.</p>
+          <h2>Find us</h2>
+          <p>Walk in or book online, whichever suits you.</p>
         </div>
 
-        <div className="grid grid-2">
+        <div className={`grid ${isSingleClinic ? 'grid-1' : 'grid-2'}`}>
           {Object.values(clinics).map(c => (
             <article className="clinic-card" key={c.key}>
               <div className="clinic-card-head">

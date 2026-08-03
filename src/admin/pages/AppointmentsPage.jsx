@@ -12,10 +12,12 @@ const STATUSES = [
   { value: 'cancelled', label: 'Cancelled' },
   { value: 'no_show', label: 'No-show' },
 ]
+// Must match the clinic slugs seeded in database/seeders/ClinicSeeder.php.
+// A single-clinic site only needs the "All" option — filtering by clinic is
+// meaningless with one location, but it's kept as a no-op filter rather than
+// removed, so this list is exactly what a second location would extend.
 const CLINICS = [
-  { value: '', label: 'All clinics' },
-  { value: 'tullamore', label: 'Tullamore' },
-  { value: 'kildare', label: 'Kildare' },
+  { value: '', label: 'All appointments' },
 ]
 
 export default function AppointmentsPage() {

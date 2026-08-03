@@ -75,7 +75,7 @@ export default function SettingsPage() {
             </div>
             <div className="admin-field">
               <label>Admin notification email</label>
-              <input type="email" className="admin-input" value={settings.admin_notification_email || ''} onChange={e => setSettings(s => ({ ...s, admin_notification_email: e.target.value }))} placeholder="reception@walkingp.ie" />
+              <input type="email" className="admin-input" value={settings.admin_notification_email || ''} onChange={e => setSettings(s => ({ ...s, admin_notification_email: e.target.value }))} placeholder="info@waterfordclinic.ie" />
             </div>
           </div>
           <div className="admin-field">

@@ -1,5 +1,5 @@
 /* =====================================================================
-   Walk In GP — Tracking & analytics configuration
+   Tracking & analytics configuration
    ---------------------------------------------------------------------
    👉 EDIT YOUR IDS HERE. This is the ONLY file you need to touch when
       turning on tracking. Everything else reads from this config.
@@ -9,6 +9,8 @@
    Google Ads, Meta Pixel, Clarity, LinkedIn & TikTok tags are usually
    added INSIDE GTM rather than here (see ANALYTICS.md for both approaches).
    ===================================================================== */
+
+import { site } from './site.js'
 
 export const trackingConfig = {
   /* ────────────────────────────────────────────────────────────────
@@ -23,13 +25,13 @@ export const trackingConfig = {
      Loaded directly via gtag.js in index.html. Kept here so the React
      analytics helpers can reference it (e.g. for custom events).
      ──────────────────────────────────────────────────────────────── */
-  ga4MeasurementId: 'G-Z2PFGWRWTX', // ✅ Live GA4 measurement ID
+  ga4MeasurementId: site.analytics.ga4MeasurementId,
 
   /* ────────────────────────────────────────────────────────────────
      Google Ads — Conversion ID (format: AW-123456789)
      Used for conversion tracking + the Conversion Linker tag.
      ──────────────────────────────────────────────────────────────── */
-  googleAdsConversionId: 'AW-17330317114', // ✅ Live Google Ads conversion ID
+  googleAdsConversionId: site.analytics.googleAdsConversionId,
 
   /* ────────────────────────────────────────────────────────────────
      Meta (Facebook / Instagram) Pixel ID (numeric, ~15 digits)
@@ -72,8 +74,7 @@ export const EVENTS = {
   EMAIL_CLICK: 'email_click',                        // email address clicked
 
   // Clinic selection
-  TULLAMORE_CLINIC_SELECTED: 'tullamore_clinic_selected',
-  KILDARE_CLINIC_SELECTED: 'kildare_clinic_selected',
+  CLINIC_SELECTED: 'clinic_selected',
 
   // Booking funnel
   APPOINTMENT_FORM_SUBMIT: 'appointment_form_submit', // form submitted (any outcome)
@@ -93,6 +94,6 @@ export const EVENTS = {
    Leave as "" to skip sending a Google Ads conversion for that event.
    ===================================================================== */
 export const GOOGLE_ADS_LABELS = {
-  [EVENTS.BOOKING_SUCCESS]: 'hEaqCNDhtfYbELrO3sdA',  // ✅ "Book appointment" conversion action
-  [EVENTS.APPOINTMENT_FORM_SUBMIT]: ''               // ⚠️ no matching conversion action yet
+  [EVENTS.BOOKING_SUCCESS]: site.analytics.googleAdsLabels.booking_success || '',
+  [EVENTS.APPOINTMENT_FORM_SUBMIT]: site.analytics.googleAdsLabels.appointment_form_submit || ''
 }

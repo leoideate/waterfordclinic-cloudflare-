@@ -1,7 +1,7 @@
 {
-    "name": "twl/clinic-backend",
+    "name": "waterford-clinic/backend",
     "type": "project",
-    "description": "TWL Clinic — Laravel API for patient appointment bookings (Tullamore & Kildare).",
+    "description": "Waterford Clinic — Laravel API for patient appointment bookings.",
     "keywords": ["laravel", "clinic", "appointments", "api"],
     "license": "MIT",
     "require": {

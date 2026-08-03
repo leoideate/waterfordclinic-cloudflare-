@@ -1,9 +1,15 @@
 import { useState, useEffect } from 'react'
 import { services, features, stats, faqs, testimonials, clinics } from '../data/siteData.js'
+import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 
 /* ============== Stats strip ============== */
 export function StatsStrip() {
+  // Hidden until the client supplies figures they can substantiate. An empty
+  // coloured band looks broken, and inventing numbers for a medical practice
+  // is not an option.
+  if (!stats.length) return null
+
   return (
     <div className="stats-strip">
       <div className="container">
@@ -30,11 +36,15 @@ export function StatsStrip() {
 /* ============== Services ============== */
 function ServiceCard({ s }) {
   const [imgFailed, setImgFailed] = useState(false)
+  // `image: null` is the normal state until the client supplies photography.
+  // Checking it up front matters because an <img> with an empty src does not
+  // reliably fire onError, so the fallback would never kick in.
+  const showImage = Boolean(s.image) && !imgFailed
 
   return (
     <article className="service-card">
       <div className="svc-image-wrap">
-        {!imgFailed ? (
+        {showImage ? (
           <img
             className="svc-image"
             src={s.image}
@@ -76,8 +86,8 @@ export function Services() {
         <div className="section-head center">
           <span className="eyebrow">Our Services</span>
           <h2>Everything you'd expect from your GP, and more</h2>
-          <p>From everyday illnesses to ongoing health management, our team provides comprehensive
-             primary care for all ages, at both our Tullamore and Kildare clinics.</p>
+          <p>From everyday illnesses and minor injuries to women's health and mental
+             health support, our team provides comprehensive primary care for all ages.</p>
         </div>
 
         <div className="grid grid-3">
@@ -172,9 +182,9 @@ export function WhyUs() {
     <section id="why">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Why Walk In GP</span>
+          <span className="eyebrow">Why {site.brand}</span>
           <h2>Care that fits around your life</h2>
-          <p>We've built our clinics around one idea: making it genuinely easy to see a doctor when you need to.</p>
+          <p>We've built the clinic around one idea: making it genuinely easy to see a doctor when you need to.</p>
         </div>
 
         <div className="grid grid-3">
@@ -208,19 +218,26 @@ export function Testimonials() {
   const count = testimonials.length
   const reviewClinic = Object.values(clinics).find(c => c.googleReviewUrl)
 
-  const go = (i) => setIndex((i + count) % count)
+  const go = (i) => setIndex(count ? (i + count) % count : 0)
 
   useEffect(() => {
+    // `% 0` is NaN, which would blank the carousel and spin a pointless
+    // timer, so don't start one until there are reviews to rotate.
+    if (count < 2) return
     const id = setInterval(() => setIndex(i => (i + 1) % count), 7000)
     return () => clearInterval(id)
   }, [count])
+
+  // No reviews yet — hide the whole section rather than render an empty
+  // slider. Reusing another practice's reviews here is not an option.
+  if (!count) return null
 
   return (
     <section className="bg-green-soft">
       <div className="container">
         <div className="section-head center">
           <span className="eyebrow">Patient Stories</span>
-          <h2>Trusted by thousands across the midlands</h2>
+          <h2>What our patients say</h2>
         </div>
 
         <div className="testimonial-slider">

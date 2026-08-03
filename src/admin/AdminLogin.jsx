@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { site } from '../config/site.js'
 import { useAuth } from './context/AuthContext.jsx'
 import { adminRequest } from '../lib/adminApi.js'
 
@@ -58,7 +59,7 @@ export default function AdminLogin() {
             <path d="M16 6v20M6 16h20" stroke="#fff" strokeWidth="3.4" strokeLinecap="round" />
           </svg>
           <div>
-            <strong>Walk In GP</strong>
+            <strong>{site.brand}</strong>
             <small>Admin Login</small>
           </div>
         </div>

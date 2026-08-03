@@ -69,7 +69,7 @@ export function NewBookingProvider({ children }) {
         .new-booking-toast {
           position: fixed; top: 18px; right: 18px; z-index: 500;
           display: flex; align-items: center; gap: 10px;
-          background: var(--green-900, #14532d); color: #fff;
+          background: var(--green-900); color: #fff;
           padding: 14px 18px; border-radius: 12px;
           box-shadow: 0 10px 30px rgba(0,0,0,0.25);
           cursor: pointer; max-width: 320px;

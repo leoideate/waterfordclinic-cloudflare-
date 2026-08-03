@@ -178,7 +178,10 @@ select.inp {
 }
 .inp:focus {
   outline: none; border-color: var(--green-500);
-  box-shadow: 0 0 0 4px rgba(47, 180, 87, 0.15);
+  /* rgb(46,160,194) is --green-500 (#2ea0c2) as an rgba triple — CSS can't
+     apply alpha to a var() hex directly, so this must be kept in sync by
+     hand if the palette changes again. */
+  box-shadow: 0 0 0 4px rgba(46, 160, 194, 0.15);
 }
 .inp[data-error="true"] { border-color: var(--danger); box-shadow: 0 0 0 4px rgba(214,69,69,0.12); }
 textarea.inp { resize: vertical; min-height: 80px; }

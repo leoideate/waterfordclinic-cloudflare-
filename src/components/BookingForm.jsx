@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useClinic } from '../context/ClinicContext.jsx'
+import { site } from '../config/site.js'
 import { services_dropdown, timeSlots } from '../data/siteData.js'
 import { createAppointment, fetchAvailability } from '../lib/api.js'
 import { track } from '../lib/analytics.js'
@@ -199,7 +200,7 @@ export default function BookingForm({ compact = false, lockClinic = null }) {
 
     // ---- Success ----
     if (result.ok) {
-      const ref = result.data?.data?.reference || ('WIGP-' + Date.now().toString().slice(-6))
+      const ref = result.data?.data?.reference || ('WC-' + Date.now().toString().slice(-6))
       setSubmitted({
         ...form,
         clinic: activeClinic,
@@ -238,7 +239,7 @@ export default function BookingForm({ compact = false, lockClinic = null }) {
 
     // ---- Network/unreachable → fall back to a mailto draft ----
     if (result.status === 0) {
-      const ref = 'WIGP-' + Date.now().toString().slice(-6)
+      const ref = 'WC-' + Date.now().toString().slice(-6)
       setUsedFallback(true)
       setSubmitted({
         ...form,
@@ -291,7 +292,7 @@ export default function BookingForm({ compact = false, lockClinic = null }) {
   if (submitted) {
     const mailSubject = encodeURIComponent(`Appointment - ${submitted.clinic.name} - ${submitted.firstName} ${submitted.lastName}`)
     const mailBody = encodeURIComponent(
-`Walk In GP Appointment
+`${site.brand} Appointment
 
 Clinic:       ${submitted.clinic.name} (${submitted.clinic.fullName})
 Preferred:    ${submitted.date} at ${submitted.time}
@@ -468,7 +469,7 @@ ${submitted.notes || '—'}
         </Field>
         <Field label="Address" required error={errors.address}>
           <input data-error={!!errors.address} className="inp" type="text" value={form.address}
-            onChange={e => set('address', e.target.value)} placeholder="12 Main St, Tullamore, Co. Offaly" autoComplete="street-address" />
+            onChange={e => set('address', e.target.value)} placeholder="12 Main St, Waterford" autoComplete="street-address" />
         </Field>
       </fieldset>
 
@@ -562,18 +563,22 @@ ${submitted.notes || '—'}
         <input type="checkbox" checked={form.consent}
           onChange={e => set('consent', e.target.checked)} />
         <span>
-          I consent to Walk In GP processing my details to arrange this appointment.
+          I consent to {site.brand} processing my details to arrange this appointment.
           My information is held securely under GDPR.{' '}
           <span className="muted">(Required)</span>
         </span>
       </label>
       {errors.consent && <p className="field-error">{errors.consent}</p>}
 
-      {/* Fee + Medical Card / GMS notice — must be visible before submit */}
-      <div className="fee-notice" role="note">
-        <strong>⚠️ Please note:</strong> Medical Cards and GMS are not accepted at Walk In GP.
-        The consultation fee is <strong>€60</strong>, payable on the day.
-      </div>
+      {/* Fee + medical card notice, shown before submit. Suppressed until
+          the client confirms their pricing — see src/config/site.js. */}
+      {site.consultationFee && (
+        <div className="fee-notice" role="note">
+          <strong>⚠️ Please note:</strong>{' '}
+          {site.acceptsMedicalCard === false && `Medical Cards and GMS are not accepted at ${site.brand}. `}
+          The consultation fee is <strong>{site.consultationFee}</strong>, payable on the day.
+        </div>
+      )}
 
       <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={submitting}>
         {submitting ? (

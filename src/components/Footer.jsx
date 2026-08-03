@@ -1,5 +1,6 @@
 import { clinics, services } from '../data/siteData.js'
 import { useClinic } from '../context/ClinicContext.jsx'
+import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 
 export default function Footer() {
@@ -11,10 +12,10 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <div className="brand">
-            <img src="/logo-light.png" alt="Walk In GP" className="footer-logo" width="180" height="53" />
+            <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="180" height="53" />
           </div>
-          <p>Walk-in general practice in Tullamore &amp; Kildare. Friendly, professional care for the whole family, book online or just drop in.</p>
-          <p className="footer-reg">Irish Medical Council Registration No. 427776</p>
+          <p>Walk-in and out-of-hours GP care in Waterford. Urgent medical care for when your own doctor is closed — book online or just drop in.</p>
+          {/* TODO: add this client's own Irish Medical Council registration number */}
           <div className="footer-socials">
             <a href="#" aria-label="Facebook">f</a>
             <a href="#" aria-label="Instagram">◎</a>
@@ -64,13 +65,13 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="container">
-          <span>© {year} Walk In GP. All rights reserved.</span>
+          <span>© {year} {site.brand}. All rights reserved.</span>
           <div className="footer-legal">
             <a href="#">Privacy</a>
             <a href="#">GDPR</a>
             <a href="#">Patient charter</a>
           </div>
-          <span className="muted">Walk-in GP · Tullamore &amp; Kildare, Ireland 🇮🇪</span>
+          <span className="muted">Walk-in &amp; out-of-hours GP · Waterford, Ireland 🇮🇪</span>
         </div>
       </div>
 

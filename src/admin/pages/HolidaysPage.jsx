@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { holidaysApi } from '../../lib/adminApi.js'
 
+// Matches the single option in App\Models\Holiday::SCOPES on the backend.
+// A multi-clinic client would list one entry per clinic plus a combined
+// "both/all" option here.
 const SCOPES = [
-  { value: 'both', label: 'Both clinics' },
-  { value: 'tullamore', label: 'Tullamore only' },
-  { value: 'kildare', label: 'Kildare only' },
+  { value: 'both', label: 'Waterford Clinic' },
 ]
 const emptyForm = { name: '', date: '', scope: 'both', is_full_day: true, start_time: '', end_time: '', notes: '' }
 

@@ -1,34 +1,39 @@
 <!doctype html>
-<html lang="en-IE">
+<html lang="%SITE_LANG%">
   <head>
     <meta charset="UTF-8" />
 
     <!-- ============================================================ -->
-    <!-- 🔧 SITE CONFIG: update these when you go live                -->
+    <!-- 🔧 SITE CONFIG                                                -->
+    <!-- Brand name, domain, tracking IDs come from src/config/site.js -->
+    <!-- via the siteConfigHtml Vite plugin — edit values there, not   -->
+    <!-- here, so a rebuild can never leave a stale ID behind.         -->
     <!-- ============================================================ -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="%SITE_FAVICON%" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1f7a3e" />
+    <meta name="theme-color" content="#1f6f8b" />
     <meta
       name="description"
-      content="Book a private walk-in GP appointment online at Walk In GP in Tullamore or Kildare. Same-day consultations, no medical card needed. Just walk in or book ahead."
+      content="Walk-in and out-of-hours GP care in Waterford. Urgent medical care, minor injuries, women's health and same-day consultations. Book online or just walk in."
     />
-    <meta name="keywords" content="GP Tullamore, GP Kildare, walk-in clinic Ireland, doctor appointment, Walk In GP, online booking" />
-    <link rel="canonical" href="https://www.walkingp.ie/" />
-    <title>Walk-In GP Clinics in Tullamore & Kildare | Book Online</title>
+    <meta name="keywords" content="GP Waterford, walk-in clinic Waterford, out of hours GP Waterford, urgent care Waterford, doctor appointment Waterford" />
+    <link rel="canonical" href="%SITE_DOMAIN%/" />
+    <title>Waterford Clinic | Walk-In & Out-of-Hours GP Care</title>
 
     <!-- ============================================================ -->
     <!-- 🌐 SOCIAL SHARING: Open Graph (Facebook, WhatsApp, LinkedIn) -->
-    <!-- Replace og:url and og:image with the live values.             -->
     <!-- ============================================================ -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Walk In GP" />
-    <meta property="og:title" content="Walk In GP Clinic Appointments in Tullamore and Kildare" />
-    <meta property="og:description" content="Book a private walk-in GP appointment online at Walk In GP in Tullamore or Kildare. Same-day consultations, no medical card needed." />
-    <meta property="og:url" content="https://www.walkingp.ie/" />
-    <!-- og-image: 1200×630 PNG. Replace og-image.svg with a real PNG when available. -->
-    <meta property="og:image" content="https://www.walkingp.ie/og-image.svg" />
-    <meta property="og:image:alt" content="Walk In GP: Walk-in GP clinics in Tullamore and Kildare" />
+    <meta property="og:site_name" content="%SITE_BRAND%" />
+    <meta property="og:title" content="Waterford Clinic | Walk-In & Out-of-Hours GP Care" />
+    <meta property="og:description" content="Walk-in and out-of-hours GP care in Waterford. Urgent medical care, minor injuries, women's health and same-day consultations." />
+    <meta property="og:url" content="%SITE_DOMAIN%/" />
+    <!-- TODO: og-image.png does not exist yet — supply a real 1200×630 PNG.
+         SVG is deliberately NOT used here: Facebook, LinkedIn, X and
+         WhatsApp all silently refuse image/svg+xml, so a share renders
+         with no image at all until this is a real PNG/JPG. -->
+    <meta property="og:image" content="%SITE_DOMAIN%/og-image.png" />
+    <meta property="og:image:alt" content="Waterford Clinic — walk-in and out-of-hours GP care" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_IE" />
@@ -37,29 +42,40 @@
     <!-- 🐦 SOCIAL SHARING: Twitter / X Card                          -->
     <!-- ============================================================ -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Walk In GP Clinic Appointments in Tullamore and Kildare" />
-    <meta name="twitter:description" content="Book a private walk-in GP appointment online at Walk In GP in Tullamore or Kildare. Same-day consultations, no medical card needed." />
-    <meta name="twitter:image" content="https://www.walkingp.ie/og-image.svg" />
-    <!-- Optional: <meta name="twitter:site" content="@WalkInGP" /> -->
+    <meta name="twitter:title" content="Waterford Clinic | Walk-In & Out-of-Hours GP Care" />
+    <meta name="twitter:description" content="Walk-in and out-of-hours GP care in Waterford. Urgent medical care, minor injuries, women's health and same-day consultations." />
+    <meta name="twitter:image" content="%SITE_DOMAIN%/og-image.png" />
 
     <!-- ============================================================ -->
-    <!-- 📊 GOOGLE ANALYTICS (GA4 gtag.js) + GOOGLE ADS conversion tag -->
-    <!-- GA4 Measurement ID: G-Z2PFGWRWTX                              -->
-    <!-- Ads Conversion ID:  AW-17330317114 ("Book appointment")      -->
+    <!-- 📊 GOOGLE ANALYTICS (GA4) + GOOGLE ADS conversion tag        -->
+    <!-- IDs come from src/config/site.js — currently EMPTY for this  -->
+    <!-- client. An empty %GA4_ID%/%GOOGLE_ADS_ID% means gtag loads   -->
+    <!-- with a blank config and reports nothing, rather than silently -->
+    <!-- reporting Waterford's traffic into the previous client's      -->
+    <!-- GA4/Ads accounts. Fill in site.js once this client's own      -->
+    <!-- properties exist — do not hardcode IDs here.                  -->
     <!-- ============================================================ -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z2PFGWRWTX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%GA4_ID%"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('config', 'G-Z2PFGWRWTX');
-      gtag('config', 'AW-17330317114');
+      gtag('config', '%GA4_ID%');
+      gtag('config', '%GOOGLE_ADS_ID%');
     </script>
 
     <!-- ============================================================ -->
-    <!-- 🔍 STRUCTURED DATA (JSON-LD): powers Google rich results.   -->
-    <!-- Organization + WebSite + 2× MedicalBusiness + FAQPage.       -->
-    <!-- This inline block is the only copy — nothing else to sync.   -->
+    <!-- 🔍 STRUCTURED DATA (JSON-LD): powers Google rich results.    -->
+    <!-- Organization + WebSite + MedicalBusiness + FAQPage.          -->
+    <!--                                                               -->
+    <!-- ⚠️ address, openingHoursSpecification, telephone-as-address- -->
+    <!-- proof and aggregateRating are DELIBERATELY OMITTED below.    -->
+    <!-- None of these are published on the client's current site or  -->
+    <!-- confirmed by the client, and inventing a street address or    -->
+    <!-- opening hours for a medical business in structured data is    -->
+    <!-- worse than leaving the field out — Google may show it as fact -->
+    <!-- to someone deciding where to seek care. Add each field only   -->
+    <!-- once the client has confirmed it in src/data/siteData.js.     -->
     <!-- ============================================================ -->
     <script type="application/ld+json">
     {
@@ -67,89 +83,39 @@
       "@graph": [
         {
           "@type": "Organization",
-          "@id": "https://www.walkingp.ie/#organization",
-          "name": "Walk In GP",
-          "url": "https://www.walkingp.ie/",
-          "logo": "https://www.walkingp.ie/favicon.svg",
-          "description": "Walk-in GP clinics in Tullamore and Kildare, Ireland. Book appointments online."
+          "@id": "%SITE_DOMAIN%/#organization",
+          "name": "%SITE_BRAND%",
+          "url": "%SITE_DOMAIN%/",
+          "logo": "%SITE_DOMAIN%/favicon.svg",
+          "description": "Walk-in and out-of-hours GP clinic in Waterford, Ireland. Book appointments online."
         },
         {
           "@type": "WebSite",
-          "@id": "https://www.walkingp.ie/#website",
-          "url": "https://www.walkingp.ie/",
-          "name": "Walk In GP",
-          "publisher": { "@id": "https://www.walkingp.ie/#organization" },
+          "@id": "%SITE_DOMAIN%/#website",
+          "url": "%SITE_DOMAIN%/",
+          "name": "%SITE_BRAND%",
+          "publisher": { "@id": "%SITE_DOMAIN%/#organization" },
           "inLanguage": "en-IE"
         },
         {
           "@type": "MedicalBusiness",
-          "@id": "https://www.walkingp.ie/#tullamore",
-          "name": "Walk In GP Tullamore",
-          "description": "Walk-in GP care in the heart of Tullamore. Private GP consultations, online booking, walk-in service.",
-          "url": "https://www.walkingp.ie/",
-          "telephone": "+353818362867",
-          "email": "tullamore@walkingp.ie",
-          "image": "https://www.walkingp.ie/og-image.svg",
-          "priceRange": "€€",
-          "currenciesAccepted": "EUR",
-          "parentOrganization": { "@id": "https://www.walkingp.ie/#organization" },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Offaly St",
-            "addressLocality": "Tullamore",
-            "addressRegion": "Co. Offaly",
-            "postalCode": "R35 C985",
-            "addressCountry": "IE"
-          },
-          "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "20:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:00", "closes": "18:00" }
-          ],
-          "medicalSpecialty": ["GeneralPractice", "PrimaryCare"],
-          "sameAs": ["https://www.google.com/maps?cid=16203518841893621514"],
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "20"
-          }
-        },
-        {
-          "@type": "MedicalBusiness",
-          "@id": "https://www.walkingp.ie/#kildare",
-          "name": "Walk In GP Kildare",
-          "description": "Modern walk-in GP service in Kildare town. Private GP consultations, online booking, walk-in service.",
-          "url": "https://www.walkingp.ie/kildare",
-          "telephone": "+353818362867",
-          "email": "kildare@walkingp.ie",
-          "image": "https://www.walkingp.ie/og-image.svg",
-          "priceRange": "€€",
-          "currenciesAccepted": "EUR",
-          "parentOrganization": { "@id": "https://www.walkingp.ie/#organization" },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "3 Fairview Cottages",
-            "addressLocality": "Kildare",
-            "addressRegion": "Co. Kildare",
-            "postalCode": "R51 HV25",
-            "addressCountry": "IE"
-          },
-          "openingHoursSpecification": [
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "20:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "12:00", "closes": "18:00" },
-            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "18:00" }
-          ],
+          "@id": "%SITE_DOMAIN%/#waterford",
+          "name": "Waterford Clinic",
+          "description": "Walk-in and out-of-hours GP care in Waterford. Urgent medical care, minor injuries, women's health and same-day consultations.",
+          "url": "%SITE_DOMAIN%/",
+          "telephone": "+353515552424",
+          "email": "info@waterfordclinic.ie",
+          "parentOrganization": { "@id": "%SITE_DOMAIN%/#organization" },
           "medicalSpecialty": ["GeneralPractice", "PrimaryCare"]
         },
         {
           "@type": "FAQPage",
-          "@id": "https://www.walkingp.ie/#faq",
+          "@id": "%SITE_DOMAIN%/#faq",
           "mainEntity": [
-            { "@type": "Question", "name": "Do I need an appointment to be seen?", "acceptedAnswer": { "@type": "Answer", "text": "No. Both clinics operate a walk-in service, so you can simply arrive and wait for the next available GP. Booking online is recommended if you want a guaranteed time slot, especially at busy periods." } },
-            { "@type": "Question", "name": "Can I choose which clinic to attend?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Use the Tullamore / Kildare tabs at the top of the page to see opening hours and book at the location that suits you best." } },
-            { "@type": "Question", "name": "Do you accept medical cards (GMS)?", "acceptedAnswer": { "@type": "Answer", "text": "No. Walk In GP is a private clinic. Medical Cards and GMS are not accepted. The consultation fee is €60, payable on the day." } },
-            { "@type": "Question", "name": "How much does a consultation cost?", "acceptedAnswer": { "@type": "Answer", "text": "A standard private GP consultation is €60, payable on the day. Blood tests, travel vaccines and procedures are priced separately, so ask at reception for our full price list." } },
-            { "@type": "Question", "name": "What if I have a medical emergency?", "acceptedAnswer": { "@type": "Answer", "text": "Walk In GP is not an emergency service. In a life-threatening emergency always call 999 or 112, or go to your nearest Emergency Department." } }
+            { "@type": "Question", "name": "Do I need an appointment to be seen?", "acceptedAnswer": { "@type": "Answer", "text": "No. Waterford Clinic operates a walk-in service, so you can arrive and wait for the next available doctor. Booking online is recommended if you want a guaranteed time, especially at busier periods." } },
+            { "@type": "Question", "name": "Can you treat minor injuries instead of the hospital?", "acceptedAnswer": { "@type": "Answer", "text": "For many minor injuries, yes — we handle lacerations and stitches, skin lesion removal and ingrown toenail treatment on site, usually far faster than an emergency department. Serious injuries should still go to an ED." } },
+            { "@type": "Question", "name": "Can I get a sick certificate for work?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Medical certificates for work, school or college are issued following a consultation with one of our doctors." } },
+            { "@type": "Question", "name": "What if I have a medical emergency?", "acceptedAnswer": { "@type": "Answer", "text": "Waterford Clinic is not an emergency service. In a life-threatening emergency always call 999 or 112, or go to your nearest Emergency Department." } }
           ]
         }
       ]
@@ -165,7 +131,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <!-- Speeds up the hero background photo (largest above-fold element) -->
+    <!-- Speeds up the hero background photo (largest above-fold element).
+         TODO: HERO_BG_URL in src/components/Hero.jsx is still the generic
+         stock photo from the platform template — swap for the client's own
+         photography when available, and drop this preconnect if it's
+         hosted locally instead of on Unsplash. -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   </head>
   <body>

@@ -15,9 +15,9 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@walkingp.ie'],
+            ['email' => 'admin@waterfordclinic.ie'],
             [
-                'name' => 'Walk In GP Admin',
+                'name' => 'Waterford Clinic Admin',
                 'username' => 'admin',
                 'password' => Hash::make('ChangeMe123!'),   // bcrypt-hashed, never plain-text
                 'role' => 'admin',
