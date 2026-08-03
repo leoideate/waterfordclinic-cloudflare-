@@ -125,14 +125,20 @@ export default function Hero() {
            has a readable backdrop, regardless of the photo underneath. */
         .hero-overlay {
           position: absolute; inset: 0; z-index: 1;
+          /* Dark scrim over the stock photo, for text readability. Three
+             tints of --green-900 (#123c4a, rgb 18/60/74) at decreasing
+             darkness — rgb(9,28,35) ~57%, rgb(13,44,54) ~76%, rgb(18,60,74)
+             100% — same ratios as the original green scrim, just re-based
+             on the teal palette. Kept as literal rgba() rather than var()
+             because CSS can't apply per-stop alpha to a custom property. */
           background:
             linear-gradient(180deg,
-              rgba(10, 50, 28, 0.86) 0%,
-              rgba(14, 63, 34, 0.72) 45%,
-              rgba(20, 83, 45, 0.62) 100%),
+              rgba(9, 28, 35, 0.86) 0%,
+              rgba(13, 44, 54, 0.72) 45%,
+              rgba(18, 60, 74, 0.62) 100%),
             radial-gradient(120% 100% at 50% 30%,
-              rgba(10, 50, 28, 0.0) 0%,
-              rgba(10, 50, 28, 0.55) 100%);
+              rgba(9, 28, 35, 0.0) 0%,
+              rgba(9, 28, 35, 0.55) 100%);
         }
 
         .hero-inner {
@@ -297,10 +303,12 @@ export default function Hero() {
             text-align: left; margin-bottom: 32px;
           }
           .hero-overlay {
+            /* Same darkest teal tint as the desktop scrim above — see the
+               note there. */
             background:
               linear-gradient(180deg,
-                rgba(10, 50, 28, 0.82) 0%,
-                rgba(10, 50, 28, 0.9) 100%);
+                rgba(9, 28, 35, 0.82) 0%,
+                rgba(9, 28, 35, 0.9) 100%);
           }
           .hero-lead { margin-bottom: 24px; }
           .clinic-tab { padding: 16px 18px; min-height: 70px; gap: 12px; }

@@ -157,12 +157,13 @@ export default function Header() {
           outline: 3px solid var(--green-300, #6fd29a);
           outline-offset: 2px;
         }
-        /* Active state: filled green pill */
+        /* Active state: filled brand-colour pill */
         .nav-clinic-btn.is-current {
           background: var(--green-700);
           color: #ffe9a8;          /* gold text, matches hero tab styling */
           border-color: var(--green-700);
-          box-shadow: 0 4px 12px rgba(20, 83, 45, 0.28);
+          /* rgb(18,60,74) is --green-900 (#123c4a) as a shadow tint. */
+          box-shadow: 0 4px 12px rgba(18, 60, 74, 0.28);
         }
         .nav-clinic-btn.is-current:hover {
           /* --green-800 is now a real variable in global.css, so this
