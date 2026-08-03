@@ -58,7 +58,7 @@ export default function Header() {
             {/* Intrinsic size matches the real logo's ~1.27:1 aspect ratio
                 (icon mark stacked over the wordmark) — CSS still drives the
                 rendered height, this is just a layout-shift hint. */}
-            <img src={site.logo.header} alt="" width="68" height="54" />
+            <img src={site.logo.header} alt="" width="81" height="64" />
           </span>
           <span className="brand-text">
             <small>{site.tagline}</small>
@@ -122,7 +122,7 @@ export default function Header() {
         }
         .brand { display: flex; align-items: center; gap: 12px; background: none; border: 0; cursor: pointer; padding: 0; min-width: 0; }
         .brand-mark { min-width: 0; }
-        .brand-mark img { display: block; height: 54px; width: auto; max-width: 100%; }
+        .brand-mark img { display: block; height: 64px; width: auto; max-width: 100%; }
         .brand-text { display: flex; flex-direction: column; line-height: 1.1; font-family: var(--font-head); text-align: left; min-width: 0; }
         .brand-text small { color: var(--green-600); font-size: 0.95rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
         .main-nav { display: flex; align-items: center; gap: 8px; margin-left: auto; }
@@ -217,11 +217,11 @@ export default function Header() {
            side by side, so scale the logo and drop the strapline. */
         @media (max-width: 480px) {
           .header-inner { min-height: 64px; }
-          .brand-mark img { height: 40px; }
+          .brand-mark img { height: 46px; }
           .brand-text { display: none; }
         }
         @media (max-width: 360px) {
-          .brand-mark img { height: 34px; }
+          .brand-mark img { height: 40px; }
         }
       `}</style>
     </header>

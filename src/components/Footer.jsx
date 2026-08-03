@@ -22,7 +22,7 @@ export default function Footer() {
             </div>
           </div>
           <p>Walk-in and out-of-hours GP care in Waterford. Urgent medical care for when your own doctor is closed — book online or just drop in.</p>
-          {/* TODO: add this client's own Irish Medical Council registration number */}
+          <p className="footer-reg">Irish Medical Council Registered Doctor 430944</p>
           <div className="footer-socials">
             <a href="#" aria-label="Facebook">f</a>
             <a href="#" aria-label="Instagram">◎</a>
