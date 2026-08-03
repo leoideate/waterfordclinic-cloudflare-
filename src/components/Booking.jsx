@@ -101,8 +101,17 @@ export default function Booking() {
               <div className="hours-quick">
                 <div><span>{clinic.name}</span><a style={{ color: '#fff' }} href={`tel:${clinic.phone.replace(/\s/g, '')}`}
                   onClick={() => track.phoneClick(clinic.phone, clinic.key, 'booking_cta_card')}>{clinic.phone}</a></div>
-                <div><span>Mon – Fri</span><span>8:00 – 19:00</span></div>
-                <div><span>Saturday</span><span>9:00 – 14:00</span></div>
+                {/* Sourced from clinic.hours (siteData.js) rather than
+                    hardcoded — this used to literally print a DIFFERENT
+                    client's real opening hours regardless of which clinic
+                    was shown. Hidden entirely while hours are unconfirmed
+                    (see the TODO on clinics.waterford.hours) rather than
+                    showing a placeholder to a patient trying to call. */}
+                {clinic.hours
+                  .filter(h => h.time && !/^TODO/i.test(h.time))
+                  .map(h => (
+                    <div key={h.day}><span>{h.day}</span><span>{h.time}</span></div>
+                  ))}
               </div>
             </div>
           </div>

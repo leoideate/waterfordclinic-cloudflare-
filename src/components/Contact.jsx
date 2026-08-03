@@ -24,7 +24,11 @@ export default function Contact() {
               </div>
 
               <ul className="clinic-info">
-                <li><span aria-hidden="true">📍</span> {c.address}</li>
+                {/* Hidden rather than showing a placeholder — the address
+                    is unconfirmed for this client (see siteData.js). An
+                    empty <li> is preferable to printing "TODO: ..." on a
+                    live page a patient is reading. */}
+                {c.address && <li><span aria-hidden="true">📍</span> {c.address}</li>}
                 <li><span aria-hidden="true">📞</span>
                   <a href={`tel:${c.phone.replace(/\s/g, '')}`}
                      onClick={() => track.phoneClick(c.phone, c.key, 'contact_card')}>
@@ -40,9 +44,16 @@ export default function Contact() {
               </ul>
 
               <div className="clinic-hours-mini">
-                {c.hours.map(h => (
-                  <div key={h.day}><span>{h.day}</span><strong>{h.time}</strong></div>
-                ))}
+                {/* Only rows with a confirmed time render — see the TODO on
+                    clinics.waterford.hours in siteData.js. If nothing is
+                    confirmed yet, say so plainly instead of an empty box. */}
+                {c.hours.filter(h => h.time).length > 0 ? (
+                  c.hours.filter(h => h.time).map(h => (
+                    <div key={h.day}><span>{h.day}</span><strong>{h.time}</strong></div>
+                  ))
+                ) : (
+                  <div style={{ border: 0 }}><span>Opening hours</span><strong>Call us to check</strong></div>
+                )}
                 {c.hoursNote && (
                   <div style={{ display: 'block', paddingTop: 8, fontSize: '0.85rem', color: 'var(--ink-500)', border: 0 }}>
                     {c.hoursNote}
@@ -55,16 +66,28 @@ export default function Contact() {
                    onClick={() => { setActiveClinicKey(c.key); track.clinicSelected(c.key, 'contact_card'); track.bookAppointmentClick('contact_card') }}>
                   Book at {c.name}
                 </a>
-                <a className="btn btn-outline"
-                   href={c.directionsUrl}
-                   target="_blank" rel="noopener noreferrer"
-                   onClick={() => track.directionsClick(c.key)}>
-                  🗺️ Directions
-                </a>
+                {/* No Google Maps link until the address is confirmed and a
+                    real directionsUrl is set — an empty href would open a
+                    blank tab. */}
+                {c.directionsUrl && (
+                  <a className="btn btn-outline"
+                     href={c.directionsUrl}
+                     target="_blank" rel="noopener noreferrer"
+                     onClick={() => track.directionsClick(c.key)}>
+                    🗺️ Directions
+                  </a>
+                )}
               </div>
-              <p style={{ marginTop: 12, marginBottom: 0, fontSize: '0.9rem' }}>
-                <a href={`/${c.key}`}>More about the {c.name} clinic →</a>
-              </p>
+              {/* Linked to a standalone SEO landing page per clinic (see
+                  routes/web.php) in the original multi-clinic template.
+                  Waterford Clinic has no such page — the homepage already
+                  covers "about the clinic" for a single location — and
+                  /waterford is unregistered, so this would otherwise 404. */}
+              {!isSingleClinic && (
+                <p style={{ marginTop: 12, marginBottom: 0, fontSize: '0.9rem' }}>
+                  <a href={`/${c.key}`}>More about the {c.name} clinic →</a>
+                </p>
+              )}
             </article>
           ))}
         </div>

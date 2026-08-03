@@ -30,7 +30,13 @@ export const clinics = {
     county: 'Co. Waterford',
     tagline: 'Walk-in and out-of-hours GP care in Waterford',
 
-    address: 'TODO: confirm full street address with client',
+    // TODO: confirm the full street address with the client. Deliberately
+    // an empty string, NOT a placeholder like "TODO: confirm..." — every
+    // component that renders this (Contact card, booking confirmation
+    // email) treats an empty address as "not yet known" and hides the row
+    // rather than rendering literal text. Do not put placeholder text
+    // here, it will be sent to real patients in their confirmation email.
+    address: '',
     eircode: '', // TODO: confirm Eircode
 
     phone: '051 552424',
@@ -38,11 +44,13 @@ export const clinics = {
 
     // TODO: confirm real opening hours. The out-of-hours positioning on
     // their current site implies evening/weekend cover, but no times are
-    // published — do not guess.
+    // published — do not guess. `time: ''` (not a placeholder string) for
+    // the same reason as `address` above — every render site filters out
+    // rows with an empty time.
     hours: [
-      { day: 'Mon – Fri', time: 'TODO: confirm' },
-      { day: 'Saturday', time: 'TODO: confirm' },
-      { day: 'Sunday', time: 'TODO: confirm' },
+      { day: 'Mon – Fri', time: '' },
+      { day: 'Saturday', time: '' },
+      { day: 'Sunday', time: '' },
     ],
     hoursNote: '',
 

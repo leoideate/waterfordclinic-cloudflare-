@@ -1,7 +1,10 @@
 @php
-    // Brand colours reused throughout the email.
-    $green   = '#1f7a3e';
-    $greenDk = '#14552d';
+    // Brand colours reused throughout the email. Email clients don't run
+    // the site's CSS, so these are a hand-kept duplicate of the palette in
+    // src/styles/global.css (--green-700 / --green-800) — update both
+    // together if the theme changes.
+    $green   = '#1f6f8b';
+    $greenDk = '#17526a';
     $ink     = '#1f2a24';
     $muted   = '#5b6b62';
     $amberBg = '#fff8e1';
@@ -33,7 +36,8 @@
                                     <td style="font-size:20px;font-weight:800;color:#ffffff;letter-spacing:-0.01em;">
                                         {{ $brand }}
                                     </td>
-                                    <td align="right" style="font-size:12px;color:#c8f0d3;text-transform:uppercase;letter-spacing:0.1em;">
+                                    {{-- Pale teal accent text on the dark header bar --}}
+                                    <td align="right" style="font-size:12px;color:#bfe4ec;text-transform:uppercase;letter-spacing:0.1em;">
                                         Appointment confirmed
                                     </td>
                                 </tr>

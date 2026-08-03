@@ -15,6 +15,14 @@ class ClinicSeeder extends Seeder
         // rather than guessed, since sending an unwell patient to the wrong
         // place or at the wrong time is a real-world harm, not a cosmetic bug.
         // MUST be confirmed with the client before launch.
+        //
+        // 'address' and each hours row's 'time' are '' (empty), NOT a
+        // placeholder string like "TODO: confirm...". `address` flows
+        // straight into the patient-facing booking confirmation email
+        // (AppointmentController -> AppointmentConfirmed mailable) — a
+        // placeholder string there is not a TODO note, it's an email a
+        // real patient reads. The frontend and the email template both
+        // treat empty as "not yet known" and hide the row.
         Clinic::updateOrCreate(
             ['slug' => 'waterford'],
             [
@@ -22,13 +30,13 @@ class ClinicSeeder extends Seeder
                 'full_name' => 'Waterford Clinic',
                 'county' => 'Co. Waterford',
                 'tagline' => 'Walk-in and out-of-hours GP care in Waterford',
-                'address' => 'TODO: confirm full street address with client',
+                'address' => '',
                 'phone' => '051 552424',
                 'email' => 'info@waterfordclinic.ie',
                 'hours' => [
-                    ['day' => 'Mon – Fri', 'time' => 'TODO: confirm'],
-                    ['day' => 'Saturday',  'time' => 'TODO: confirm'],
-                    ['day' => 'Sunday',    'time' => 'TODO: confirm'],
+                    ['day' => 'Mon – Fri', 'time' => ''],
+                    ['day' => 'Saturday',  'time' => ''],
+                    ['day' => 'Sunday',    'time' => ''],
                 ],
                 'is_active' => true,
             ]
