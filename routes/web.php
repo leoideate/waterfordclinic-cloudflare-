@@ -28,7 +28,7 @@ Route::get('/up', fn () => response('OK'))->name('up');
 | SPA catch-all — serve the built React frontend
 |--------------------------------------------------------------------------
 | Any GET request that isn't an API route (/api/*), a static asset
-| (/build/*, /favicon.svg, etc., served directly by nginx), or /up is
+| (/build/*, /favicon.png, etc., served directly by nginx), or /up is
 | handed to the React SPA. React Router then takes over client-side.
 |
 | The frontend is built into public/build/index.html by `npm run build`.

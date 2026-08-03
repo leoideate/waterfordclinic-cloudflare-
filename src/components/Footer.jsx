@@ -12,7 +12,14 @@ export default function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <div className="brand">
-            <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="180" height="53" />
+            {/* The logo has a transparent background with navy/green ink —
+                low contrast directly on the dark teal footer, and no
+                separate light/reversed variant was supplied. A white card
+                behind it is the standard fix rather than inventing a second
+                logo asset. */}
+            <div className="footer-logo-card">
+              <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="61" height="48" />
+            </div>
           </div>
           <p>Walk-in and out-of-hours GP care in Waterford. Urgent medical care for when your own doctor is closed — book online or just drop in.</p>
           {/* TODO: add this client's own Irish Medical Council registration number */}
@@ -82,6 +89,10 @@ export default function Footer() {
           padding-bottom: 48px;
         }
         .footer-brand .brand { margin-bottom: 16px; }
+        .footer-logo-card {
+          display: inline-flex; background: #fff; border-radius: 10px;
+          padding: 8px 12px;
+        }
         .footer-logo { display: block; height: 48px; width: auto; }
         .footer-brand p { color: rgba(255,255,255,0.72); font-size: 0.95rem; max-width: 320px; margin-top: 16px; }
         .footer-reg { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 10px; max-width: 320px; }

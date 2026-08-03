@@ -18,7 +18,7 @@ export const site = {
   /* ---- Identity ---- */
   brand: 'Waterford Clinic',
   tagline: 'Waterford',
-  domain: 'https://waterfordclinic.ie',
+  domain: 'https://www.waterfordclinic.ie',
   locale: 'en-IE',
   lang: 'en-IE',
 
@@ -26,9 +26,13 @@ export const site = {
      TODO: client to supply logo files. Until then these 404 — which is
      intentional, so a missing logo is noticed before launch. */
   logo: {
+    // Real client logo (navy + green mark, transparent background). Sits
+    // naturally on the header's light background. The footer is a dark
+    // teal, so Footer.jsx wraps this same file in a white card rather than
+    // needing a separate reversed/light logo asset that was never supplied.
     header: '/logo.png',
-    footer: '/logo-light.png',
-    favicon: '/favicon.svg',
+    footer: '/logo.png',
+    favicon: '/favicon.png',
   },
   // Social preview image. MUST be PNG or JPG — Facebook, LinkedIn, X and
   // WhatsApp all silently refuse SVG, rendering shares with no image.
@@ -88,7 +92,7 @@ export const site = {
   },
 }
 
-/** Absolute URL helper — url('/services') → 'https://waterfordclinic.ie/services' */
+/** Absolute URL helper — url('/services') → 'https://www.waterfordclinic.ie/services' */
 export const url = (path = '/') =>
   site.domain.replace(/\/$/, '') + (path.startsWith('/') ? path : `/${path}`)
 

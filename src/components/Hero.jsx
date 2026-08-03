@@ -3,11 +3,13 @@ import { site } from '../config/site.js'
 import { track } from '../lib/analytics.js'
 
 /* Full-bleed professional healthcare photo for the hero background.
-   Dark-green gradient overlay is applied on top for text readability.
+   A dark teal scrim (.hero-overlay below) is applied on top for text
+   readability. Stock photo, verified to actually load before being added
+   here — not the previous client's photo, chosen distinct on purpose.
    To swap: change the URL (keep the sizing params), or point at your own
    image in /public — e.g. url('/hero.jpg'). */
 const HERO_BG_URL =
-  'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=2000&q=80&auto=format&fit=crop'
+  'https://images.unsplash.com/photo-1758691461957-474a7686e388?w=2000&q=80&auto=format&fit=crop'
 
 export default function Hero() {
   const { activeClinicKey, setBookingOpenFor, clinics } = useClinic()

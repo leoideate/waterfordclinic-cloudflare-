@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useClinic } from '../context/ClinicContext.jsx'
+import { useClinic, isSingleClinic } from '../context/ClinicContext.jsx'
 import { site } from '../config/site.js'
 import { services_dropdown, timeSlots } from '../data/siteData.js'
 import { createAppointment, fetchAvailability } from '../lib/api.js'
@@ -384,14 +384,15 @@ ${submitted.notes || '—'}
       {!compact && (
         lockClinic ? (
           // LOCKED mode: show a single non-interactive chip naming the clinic.
-          // The user has already chosen via the hero/header tab; the form must
-          // not let them switch. They can pick a different clinic by going
-          // back to the hero tabs.
+          // With more than one clinic, the user chose via the hero/header tab
+          // and the form must not let them switch — "use the buttons above"
+          // pointed back at that picker. With a single clinic there is no
+          // picker and nothing to switch between, so that line doesn't apply.
           <div className="form-clinic-locked" role="status">
             <span aria-hidden="true">📍</span>
             <span>
               <strong>Booking for {clinics[lockClinic]?.name || activeClinic.name} Clinic</strong>
-              <small>To choose a different clinic, use the buttons above.</small>
+              {!isSingleClinic && <small>To choose a different clinic, use the buttons above.</small>}
             </span>
           </div>
         ) : (

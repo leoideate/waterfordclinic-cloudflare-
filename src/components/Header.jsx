@@ -55,7 +55,10 @@ export default function Header() {
           aria-label={`${site.brand} home`}
         >
           <span className="brand-mark" aria-hidden="true">
-            <img src={site.logo.header} alt="" width="210" height="62" />
+            {/* Intrinsic size matches the real logo's ~1.27:1 aspect ratio
+                (icon mark stacked over the wordmark) — CSS still drives the
+                rendered height, this is just a layout-shift hint. */}
+            <img src={site.logo.header} alt="" width="68" height="54" />
           </span>
           <span className="brand-text">
             <small>{site.tagline}</small>

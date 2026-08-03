@@ -80,7 +80,7 @@ ZCodeProject/
 ├── vite.config.js
 ├── package.json
 ├── public/
-│   └── favicon.svg
+│   └── favicon.png
 └── src/
     ├── main.jsx              # React entry
     ├── App.jsx               # page composition
