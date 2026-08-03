@@ -107,6 +107,12 @@ export default function Footer() {
         .footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
         .footer-col a { color: rgba(255,255,255,0.78); font-size: 0.95rem; }
         .footer-col a:hover { color: #fff; }
+        /* .footer-col a (class+element, specificity 0-1-1) otherwise beats
+           .btn-light (single class, 0-1-0) and forces white text onto this
+           button's white background — invisible except for the emoji.
+           Re-declaring on the more specific selector wins it back. */
+        .footer-col a.footer-cta,
+        .footer-col a.footer-cta:hover { color: var(--green-700); }
         .footer-clinic { margin-bottom: 16px; display: grid; gap: 2px; }
         .footer-clinic strong a { color: #fff; font-family: var(--font-head); }
         .footer-clinic span { font-size: 0.86rem; }
