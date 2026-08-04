@@ -9,7 +9,6 @@ export default function Contact() {
     <section id="contact">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Find Us</span>
           <h2>Find us</h2>
           <p>Walk in or book online, whichever suits you.</p>
         </div>

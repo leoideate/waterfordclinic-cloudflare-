@@ -45,8 +45,6 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <div className="hero-content">
-          <span className="eyebrow eyebrow-light">🩺 Walk-in &amp; out-of-hours GP • Waterford</span>
-
           <h1>
             See a doctor <span className="hl">today</span>.<br />
             Book your <span className="hl">{site.brand}</span> appointment online.
@@ -128,19 +126,19 @@ export default function Hero() {
         .hero-overlay {
           position: absolute; inset: 0; z-index: 1;
           /* Dark scrim over the stock photo, for text readability. Three
-             tints of --green-900 (#123c4a, rgb 18/60/74) at decreasing
-             darkness — rgb(9,28,35) ~57%, rgb(13,44,54) ~76%, rgb(18,60,74)
-             100% — same ratios as the original green scrim, just re-based
-             on the teal palette. Kept as literal rgba() rather than var()
+             tints of --green-900 (#002342, rgb 0/35/66) at decreasing
+             darkness — rgb(0,17,32) ~48%, rgb(0,26,48) ~73%, rgb(0,35,66)
+             100% — same ratios kept as the palette moved from teal to the
+             logo's real navy. Kept as literal rgba() rather than var()
              because CSS can't apply per-stop alpha to a custom property. */
           background:
             linear-gradient(180deg,
-              rgba(9, 28, 35, 0.86) 0%,
-              rgba(13, 44, 54, 0.72) 45%,
-              rgba(18, 60, 74, 0.62) 100%),
+              rgba(0, 17, 32, 0.86) 0%,
+              rgba(0, 26, 48, 0.72) 45%,
+              rgba(0, 35, 66, 0.62) 100%),
             radial-gradient(120% 100% at 50% 30%,
-              rgba(9, 28, 35, 0.0) 0%,
-              rgba(9, 28, 35, 0.55) 100%);
+              rgba(0, 17, 32, 0.0) 0%,
+              rgba(0, 17, 32, 0.55) 100%);
         }
 
         .hero-inner {
@@ -160,21 +158,12 @@ export default function Hero() {
           align-items: center;
         }
 
-        .eyebrow-light {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: rgba(255,255,255,0.14); color: #c8f0d3;
-          border: 1px solid rgba(255,255,255,0.22);
-          font-family: var(--font-head); font-weight: 600;
-          font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
-          padding: 7px 14px; border-radius: 999px;
-        }
-
         .hero h1 {
           color: #fff; margin: 20px 0 18px;
           text-shadow: 0 2px 18px rgba(0,0,0,0.35);
         }
         .hero h1 .hl {
-          background: linear-gradient(180deg, #ffe9a8, #f4b740);
+          background: linear-gradient(180deg, #c0d7c4, #20712f);
           -webkit-background-clip: text; background-clip: text; color: transparent;
           white-space: nowrap;
         }
@@ -227,7 +216,7 @@ export default function Hero() {
              --green-* variables (teal for this client) so this stays in
              sync with the rest of the palette, not a one-off hex pair. */
           background: linear-gradient(180deg, var(--green-700) 0%, var(--green-800) 100%);
-          color: #ffe9a8;   /* gold/yellow text, matches the hero heading tone */
+          color: #c0d7c4;   /* gold/yellow text, matches the hero heading tone */
 
           border: 2px solid rgba(255, 233, 168, 0.35);
           cursor: pointer;
@@ -245,15 +234,15 @@ export default function Hero() {
           background: linear-gradient(180deg, var(--green-600) 0%, var(--green-700) 100%);
         }
         .clinic-tab:focus-visible {
-          outline: 3px solid #ffe9a8;
+          outline: 3px solid #c0d7c4;
           outline-offset: 3px;
         }
 
         /* Active (selected) tab: brighter gold border + lifted shadow so
            the user can see which clinic they've picked. */
         .clinic-tab.is-active {
-          border-color: #ffe9a8;
-          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px #ffe9a8 inset;
+          border-color: #c0d7c4;
+          box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px #c0d7c4 inset;
           background: linear-gradient(180deg, var(--green-500) 0%, var(--green-600) 100%);
         }
 
@@ -266,7 +255,7 @@ export default function Hero() {
           display: block;
           font-size: 1.08rem;
           font-weight: 700;
-          color: #ffe9a8;
+          color: #c0d7c4;
           line-height: 1.25;
           text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
@@ -288,7 +277,7 @@ export default function Hero() {
           text-underline-offset: 4px;
           text-shadow: 0 1px 8px rgba(0,0,0,0.3);
         }
-        .hero-services-link:hover { color: #ffe9a8; }
+        .hero-services-link:hover { color: #c0d7c4; }
 
         /* ---- Responsive ---- */
         @media (max-width: 720px) {
@@ -305,12 +294,12 @@ export default function Hero() {
             text-align: left; margin-bottom: 32px;
           }
           .hero-overlay {
-            /* Same darkest teal tint as the desktop scrim above — see the
+            /* Same darkest navy tint as the desktop scrim above — see the
                note there. */
             background:
               linear-gradient(180deg,
-                rgba(9, 28, 35, 0.82) 0%,
-                rgba(9, 28, 35, 0.9) 100%);
+                rgba(0, 17, 32, 0.82) 0%,
+                rgba(0, 17, 32, 0.9) 100%);
           }
           .hero-lead { margin-bottom: 24px; }
           .clinic-tab { padding: 16px 18px; min-height: 70px; gap: 12px; }

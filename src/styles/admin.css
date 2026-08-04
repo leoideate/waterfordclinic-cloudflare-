@@ -103,9 +103,9 @@ a.stat-tile:hover { transform: translateY(-2px); box-shadow: var(--shadow); bord
   width: 100%; padding: 10px 12px; border: 1.5px solid #dde4df; border-radius: 8px;
   font-family: var(--font-body); font-size: 0.95rem; background: #fff; transition: border-color 0.15s, box-shadow 0.15s;
 }
-/* rgb(46,160,194) is --green-500 (#2ea0c2) as an rgba triple — see the
+/* rgb(0,89,167) is --green-500 (#0059a7) as an rgba triple — see the
    matching note in booking.css. */
-.admin-input:focus, .admin-select:focus, .admin-textarea:focus { outline: none; border-color: var(--green-500); box-shadow: 0 0 0 4px rgba(46,160,194,0.15); }
+.admin-input:focus, .admin-select:focus, .admin-textarea:focus { outline: none; border-color: var(--green-500); box-shadow: 0 0 0 4px rgba(0,89,167,0.15); }
 .admin-input.err, .admin-select.err { border-color: var(--danger); }
 .admin-textarea { min-height: 80px; resize: vertical; }
 .admin-error { color: var(--danger); font-size: 0.82rem; margin-top: 4px; }

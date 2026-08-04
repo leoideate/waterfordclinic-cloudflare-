@@ -163,17 +163,17 @@ export default function Header() {
         /* Active state: filled brand-colour pill */
         .nav-clinic-btn.is-current {
           background: var(--green-700);
-          color: #ffe9a8;          /* gold text, matches hero tab styling */
+          color: #c0d7c4;          /* pale green text, matches hero tab styling */
           border-color: var(--green-700);
-          /* rgb(18,60,74) is --green-900 (#123c4a) as a shadow tint. */
-          box-shadow: 0 4px 12px rgba(18, 60, 74, 0.28);
+          /* rgb(0,35,66) is --green-900 (#002342) as a shadow tint. */
+          box-shadow: 0 4px 12px rgba(0, 35, 66, 0.28);
         }
         .nav-clinic-btn.is-current:hover {
           /* --green-800 is now a real variable in global.css, so this
              always resolves from the palette — no hardcoded fallback hex
              left over from before that shade existed. */
           background: var(--green-800);
-          color: #ffe9a8;
+          color: #c0d7c4;
         }
 
         .menu-toggle {

@@ -61,7 +61,7 @@ export const clinics = {
     googlePlaceId: '',
     googleReviewUrl: '',
 
-    accent: '#1f6f8b',
+    accent: '#003a6c',
     imageAlt: 'Waterford Clinic',
   },
 }

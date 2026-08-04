@@ -1,7 +1,10 @@
 /* =====================================================================
    Waterford Clinic — Global styles
    ---------------------------------------------------------------------
-   Teal theme, matching src/config/site.js theme.primary (#1f6f8b).
+   Navy + green theme, derived from the real client logo (dominant navy
+   #003a6c, accent green #20712f — sampled directly from the logo file,
+   see PRODUCT.md). This replaces an earlier placeholder teal palette
+   picked before the logo existed.
 
    ⚠️  The --green-* variable NAMES are unchanged from the platform
        template on purpose — every component's <style> block references
@@ -13,17 +16,18 @@
    ===================================================================== */
 
 :root {
-  /* Brand palette — teal (Waterford Clinic)
-     --green-800 sits between 900 and 700 — it exists because a few
-     components (hero gradient, admin login background) need a third
-     stop darker than the primary but lighter than the darkest shade. */
-  --green-900: #123c4a;
-  --green-800: #17526a;
-  --green-700: #1f6f8b;
-  --green-600: #25839f;
-  --green-500: #2ea0c2;
-  --green-100: #e3f2f6;
-  --green-50:  #f2f9fb;
+  /* Brand palette — navy (Waterford Clinic), scaled from the logo's true
+     navy #003a6c. --green-800 sits between 900 and 700 — it exists
+     because a few components (hero gradient, admin login background)
+     need a third stop darker than the primary but lighter than the
+     darkest shade. */
+  --green-900: #002342;
+  --green-800: #002f58;
+  --green-700: #003a6c;
+  --green-600: #004a8a;
+  --green-500: #0059a7;
+  --green-100: #e5ebf0;
+  --green-50:  #f3f6f8;
 
   --ink-900: #0f1f17;
   --ink-700: #29413a;
@@ -32,9 +36,11 @@
 
   --cream:    #f7f9f6;
   --white:    #ffffff;
-  --gold:     #e8a33d;
+  /* Accent — the logo's actual green, replacing an earlier placeholder
+     gold/orange that predated the real logo. */
+  --gold:     #20712f;
   --danger:   #d64545;
-  --success:  #1f6f8b;
+  --success:  #003a6c;
 
   --radius-sm: 8px;
   --radius:    14px;
@@ -147,22 +153,7 @@ section { padding-block: clamp(56px, 8vw, 96px); }
 .btn-block { width: 100%; }
 .btn-lg { padding: 16px 32px; font-size: 1.05rem; }
 
-/* ---------- Eyebrow / pills ---------- */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-head);
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--green-700);
-  background: var(--green-100);
-  padding: 7px 14px;
-  border-radius: 999px;
-}
-
+/* ---------- Pills ---------- */
 .pill {
   display: inline-flex;
   align-items: center;

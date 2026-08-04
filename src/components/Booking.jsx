@@ -16,7 +16,6 @@ export default function Booking() {
       <section id="booking" className="booking booking-closed">
         <div className="container">
           <div className="booking-closed-card">
-            <span className="eyebrow">Online Booking</span>
             <h2>{isSingleClinic ? 'Start your booking' : 'Choose your clinic to start your booking'}</h2>
             <p className="lead">
               {isSingleClinic
@@ -54,7 +53,6 @@ export default function Booking() {
         <div className="booking-grid">
           {/* Left — pitch + reassurance */}
           <div className="booking-info">
-            <span className="eyebrow">Online Booking</span>
             <h2>Book your appointment at {clinic.name}</h2>
             <p className="lead">
               You're booking for <strong>{clinic.name} Clinic</strong>. Fill in your details,

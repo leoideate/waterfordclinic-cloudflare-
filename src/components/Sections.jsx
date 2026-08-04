@@ -84,7 +84,6 @@ export function Services() {
     <section id="services" className="bg-cream">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Our Services</span>
           <h2>Everything you'd expect from your GP, and more</h2>
           <p>From everyday illnesses and minor injuries to women's health and mental
              health support, our team provides comprehensive primary care for all ages.</p>
@@ -182,7 +181,6 @@ export function WhyUs() {
     <section id="why">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Why {site.brand}</span>
           <h2>Care that fits around your life</h2>
           <p>We've built the clinic around one idea: making it genuinely easy to see a doctor when you need to.</p>
         </div>
@@ -236,7 +234,6 @@ export function Testimonials() {
     <section className="bg-green-soft">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Patient Stories</span>
           <h2>What our patients say</h2>
         </div>
 
@@ -328,7 +325,6 @@ export function FAQ() {
     <section id="faq" className="bg-cream">
       <div className="container">
         <div className="section-head center">
-          <span className="eyebrow">Good to know</span>
           <h2>Frequently asked questions</h2>
         </div>
 

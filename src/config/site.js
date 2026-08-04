@@ -40,13 +40,13 @@ export const site = {
   ogImageSize: { width: 1200, height: 630 },
 
   /* ---- Theme ----
-     TODO: confirm brand colours against the client's logo. These are
-     placeholders chosen to be clearly distinct from the green used by
-     the previous client, so nothing is accidentally left un-rebranded. */
+     Sampled directly from the client's real logo file (see PRODUCT.md) —
+     navy is the dominant colour, green the accent. Kept in sync by hand
+     with the --green-* and --gold custom properties in global.css. */
   theme: {
-    primary: '#1f6f8b',      // teal — clinical, distinct from Walk In GP green
-    primaryDark: '#12495c',
-    accent: '#e8a33d',
+    primary: '#003a6c',      // navy — sampled from the logo
+    primaryDark: '#002342',
+    accent: '#20712f',       // green — sampled from the logo
   },
 
   /* ---- Analytics & advertising ----
