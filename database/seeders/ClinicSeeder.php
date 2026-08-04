@@ -9,7 +9,7 @@ class ClinicSeeder extends Seeder
 {
     public function run(): void
     {
-        // ⚠️ Waterford Clinic is a single location. Address and opening
+        // ⚠️ Waterford Walk In Clinic is a single location. Address and opening
         // hours are NOT published anywhere on waterfordclinic.ie (checked
         // home, about, services and contact pages) — left as explicit TODOs
         // rather than guessed, since sending an unwell patient to the wrong
@@ -27,9 +27,9 @@ class ClinicSeeder extends Seeder
             ['slug' => 'waterford'],
             [
                 'name' => 'Waterford',
-                'full_name' => 'Waterford Clinic',
+                'full_name' => 'Waterford Walk In Clinic',
                 'county' => 'Co. Waterford',
-                'tagline' => 'Walk-in and out-of-hours GP care in Waterford',
+                'tagline' => 'Walk-in and out-of-hours medical care in Waterford',
                 'address' => '',
                 'phone' => '051 552424',
                 'email' => 'info@waterfordclinic.ie',

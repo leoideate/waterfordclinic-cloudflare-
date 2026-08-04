@@ -79,7 +79,7 @@ export default function Contact() {
               </div>
               {/* Linked to a standalone SEO landing page per clinic (see
                   routes/web.php) in the original multi-clinic template.
-                  Waterford Clinic has no such page — the homepage already
+                  Waterford Walk In Clinic has no such page — the homepage already
                   covers "about the clinic" for a single location — and
                   /waterford is unregistered, so this would otherwise 404. */}
               {!isSingleClinic && (

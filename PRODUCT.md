@@ -54,7 +54,7 @@ them until they're set:
 Confirmed operational facts: phone 051 552424, email info@waterfordclinic.ie.
 
 ## Brand Commitments
-Name: "Waterford Clinic". Real logo supplied by the client (navy blue +
+Name: "Waterford Walk In Clinic". Real logo supplied by the client (navy blue +
 green mark, circular badge with a cross/heartbeat/hand motif, serif
 "WATERFORD" wordmark + "WALK-IN CLINIC" tagline) — lives at `public/logo.png`
 (transparent bg) with `public/logo-source.jpg` kept as the original archive.

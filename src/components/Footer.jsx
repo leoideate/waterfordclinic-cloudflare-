@@ -21,7 +21,7 @@ export default function Footer() {
               <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="61" height="48" />
             </div>
           </div>
-          <p>Walk-in and out-of-hours GP care in Waterford. Urgent medical care for when your own doctor is closed — book online or just drop in.</p>
+          <p>Walk-in and out-of-hours medical care in Waterford, for when your own doctor is closed — book online or just drop in.</p>
           <p className="footer-reg">Irish Medical Council Registered Doctor 430944</p>
           <div className="footer-socials">
             <a href="#" aria-label="Facebook">f</a>
@@ -78,7 +78,7 @@ export default function Footer() {
             <a href="#">GDPR</a>
             <a href="#">Patient charter</a>
           </div>
-          <span className="muted">Walk-in &amp; out-of-hours GP · Waterford, Ireland 🇮🇪</span>
+          <span className="muted">Walk-in &amp; out-of-hours medical care · Waterford, Ireland 🇮🇪</span>
         </div>
       </div>
 

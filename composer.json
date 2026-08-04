@@ -1,7 +1,7 @@
 {
     "name": "waterford-clinic/backend",
     "type": "project",
-    "description": "Waterford Clinic — Laravel API for patient appointment bookings.",
+    "description": "Waterford Walk In Clinic — Laravel API for patient appointment bookings.",
     "keywords": ["laravel", "clinic", "appointments", "api"],
     "license": "MIT",
     "require": {

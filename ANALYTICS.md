@@ -1,4 +1,4 @@
-# 📊 Analytics & Tracking Setup — Waterford Clinic
+# 📊 Analytics & Tracking Setup — Waterford Walk In Clinic
 
 This site is fully wired for marketing analytics through **Google Tag Manager (GTM)**. All tracking IDs live in **one file**; all events fire through a single helper. Nothing is hardcoded across components.
 

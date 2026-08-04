@@ -28,7 +28,7 @@ class AdminUserSeeder extends Seeder
 
         if ($user) {
             $user->update([
-                'name' => 'Waterford Clinic Admin',
+                'name' => 'Waterford Walk In Clinic Admin',
                 'username' => 'admin',
                 'role' => 'admin',
                 'is_active' => true,
@@ -38,7 +38,7 @@ class AdminUserSeeder extends Seeder
 
         User::create([
             'email' => 'admin@waterfordclinic.ie',
-            'name' => 'Waterford Clinic Admin',
+            'name' => 'Waterford Walk In Clinic Admin',
             'username' => 'admin',
             'password' => Hash::make('ChangeMe123!'),   // bcrypt-hashed, never plain-text
             'role' => 'admin',

@@ -1,5 +1,5 @@
 /* =====================================================================
-   Waterford Clinic — tiny API client
+   Waterford Walk In Clinic — tiny API client
    ---------------------------------------------------------------------
    - In dev, Vite proxies "/api/*" to the Laravel server (see vite.config.js),
      so the frontend just calls "/api/...".

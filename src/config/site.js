@@ -1,5 +1,5 @@
 /* =====================================================================
-   PER-CLIENT SITE CONFIGURATION — Waterford Clinic
+   PER-CLIENT SITE CONFIGURATION — Waterford Walk In Clinic
    ---------------------------------------------------------------------
    Single source of brand truth. Everything that differs between one
    clinic and the next lives here: name, domain, logos, palette,
@@ -16,7 +16,7 @@
 
 export const site = {
   /* ---- Identity ---- */
-  brand: 'Waterford Clinic',
+  brand: 'Waterford Walk In Clinic',
   tagline: 'Waterford',
   domain: 'https://www.waterfordclinic.ie',
   locale: 'en-IE',

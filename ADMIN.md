@@ -1,4 +1,4 @@
-# 🛠️ Waterford Clinic — Admin Dashboard Guide
+# 🛠️ Waterford Walk In Clinic — Admin Dashboard Guide
 
 A full admin CMS for managing appointments, clinic availability, break times, holidays, temporary closures, admin users, and settings — all of which **directly control the public booking form**.
 
@@ -211,7 +211,7 @@ MAIL_PORT=2525
 MAIL_USERNAME=…
 MAIL_PASSWORD=…
 MAIL_FROM_ADDRESS=info@waterfordclinic.ie
-MAIL_FROM_NAME="Waterford Clinic"
+MAIL_FROM_NAME="Waterford Walk In Clinic"
 ```
 
 For local dev, `MAIL_MAILER=log` writes the email to `storage/logs/laravel.log` — handy for testing without an SMTP server.

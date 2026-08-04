@@ -1,6 +1,6 @@
-# Waterford Clinic — Walk-in & Out-of-Hours GP
+# Waterford Walk In Clinic — Walk-in & Out-of-Hours Medical Care
 
-A site for Waterford Clinic, a **single-location** walk-in GP practice, with a built-in **online patient booking** flow that saves bookings to a **Laravel + SQLite** database.
+A site for Waterford Walk In Clinic, a **single-location** walk-in medical practice, with a built-in **online patient booking** flow that saves bookings to a **Laravel + SQLite** database.
 
 This is a fork of a multi-clinic booking platform originally built for a two-location practice (Tullamore & Kildare). The frontend and backend both support one clinic or several — see `src/context/ClinicContext.jsx` (`isSingleClinic`) and `App\Models\Holiday::SCOPES` for where that adapts. Brand-level settings (name, domain, colours, analytics IDs) live in `src/config/site.js`; anything below that still reads like generic platform documentation applies to both cases.
 
@@ -34,7 +34,7 @@ See [`backend/README.md`](backend/README.md) for API details, switching to MySQL
 
 ## ✨ What's included
 
-- **Hero booking CTA** — a single "Book an Appointment" button (Waterford Clinic has one location). The same component renders a clinic tab per location instead when `clinics` in `siteData.js` has more than one entry.
+- **Hero booking CTA** — a single "Book an Appointment" button (Waterford Walk In Clinic has one location). The same component renders a clinic tab per location instead when `clinics` in `siteData.js` has more than one entry.
 - **Online booking form** — clinic-aware, with:
   - Clinic chooser (synced with the hero tabs)
   - Name, phone, email, DOB, existing-patient, service, date, time, notes

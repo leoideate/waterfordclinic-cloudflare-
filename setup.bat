@@ -1,6 +1,6 @@
 @echo off
 REM =====================================================================
-REM  Waterford Clinic - Backend Setup (SAFE / IDEMPOTENT)
+REM  Waterford Walk In Clinic - Backend Setup (SAFE / IDEMPOTENT)
 REM
 REM  - If the database already exists and has data, it is LEFT UNTOUCHED.
 REM    (Existing appointments / settings are never wiped.)
@@ -18,7 +18,7 @@ cd /d "%~dp0"
 
 echo.
 echo ============================================================
-echo  Waterford Clinic - Backend Setup
+echo  Waterford Walk In Clinic - Backend Setup
 echo ============================================================
 echo.
 

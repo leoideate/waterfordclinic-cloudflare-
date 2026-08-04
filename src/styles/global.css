@@ -1,5 +1,5 @@
 /* =====================================================================
-   Waterford Clinic — Global styles
+   Waterford Walk In Clinic — Global styles
    ---------------------------------------------------------------------
    Navy + green theme, derived from the real client logo (dominant navy
    #003a6c, accent green #20712f — sampled directly from the logo file,
@@ -16,7 +16,7 @@
    ===================================================================== */
 
 :root {
-  /* Brand palette — navy (Waterford Clinic), scaled from the logo's true
+  /* Brand palette — navy (Waterford Walk In Clinic), scaled from the logo's true
      navy #003a6c. --green-800 sits between 900 and 700 — it exists
      because a few components (hero gradient, admin login background)
      need a third stop darker than the primary but lighter than the

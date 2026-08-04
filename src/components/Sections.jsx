@@ -84,7 +84,7 @@ export function Services() {
     <section id="services" className="bg-cream">
       <div className="container">
         <div className="section-head center">
-          <h2>Everything you'd expect from your GP, and more</h2>
+          <h2>Everything you'd expect from your doctor, and more</h2>
           <p>From everyday illnesses and minor injuries to women's health and mental
              health support, our team provides comprehensive primary care for all ages.</p>
         </div>

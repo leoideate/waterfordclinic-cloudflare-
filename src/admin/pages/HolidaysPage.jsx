@@ -5,7 +5,7 @@ import { holidaysApi } from '../../lib/adminApi.js'
 // A multi-clinic client would list one entry per clinic plus a combined
 // "both/all" option here.
 const SCOPES = [
-  { value: 'both', label: 'Waterford Clinic' },
+  { value: 'both', label: 'Waterford Walk In Clinic' },
 ]
 const emptyForm = { name: '', date: '', scope: 'both', is_full_day: true, start_time: '', end_time: '', notes: '' }
 

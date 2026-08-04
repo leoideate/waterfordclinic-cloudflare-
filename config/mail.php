@@ -78,7 +78,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'info@waterfordclinic.ie'),
-        'name'    => env('MAIL_FROM_NAME', env('APP_NAME', 'Waterford Clinic')),
+        'name'    => env('MAIL_FROM_NAME', env('APP_NAME', 'Waterford Walk In Clinic')),
     ],
 
 ];

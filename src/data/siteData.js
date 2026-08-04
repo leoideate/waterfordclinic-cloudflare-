@@ -1,5 +1,5 @@
 /* =====================================================================
-   Waterford Clinic — site content
+   Waterford Walk In Clinic — site content
    ---------------------------------------------------------------------
    Copy, services and FAQs for the public site. Brand-level settings
    (name, domain, colours, analytics IDs) live in src/config/site.js.
@@ -12,7 +12,7 @@
 /* =====================================================================
    CLINICS
    ---------------------------------------------------------------------
-   Waterford Clinic is a SINGLE location, unlike the two-clinic setup this
+   Waterford Walk In Clinic is a SINGLE location, unlike the two-clinic setup this
    platform was originally built for. The UI adapts: with one clinic the
    hero shows a single booking CTA instead of location tabs.
 
@@ -26,9 +26,9 @@ export const clinics = {
   waterford: {
     key: 'waterford',
     name: 'Waterford',
-    fullName: 'Waterford Clinic',
+    fullName: 'Waterford Walk In Clinic',
     county: 'Co. Waterford',
-    tagline: 'Walk-in and out-of-hours GP care in Waterford',
+    tagline: 'Walk-in and out-of-hours medical care in Waterford',
 
     // TODO: confirm the full street address with the client. Deliberately
     // an empty string, NOT a placeholder like "TODO: confirm..." — every
@@ -54,7 +54,7 @@ export const clinics = {
     ],
     hoursNote: '',
 
-    mapQuery: 'Waterford Clinic, Waterford',
+    mapQuery: 'Waterford Walk In Clinic, Waterford',
     directionsUrl: '', // TODO: add once the address is confirmed
 
     // TODO: add once the client's Google Business Profile is linked
@@ -62,7 +62,7 @@ export const clinics = {
     googleReviewUrl: '',
 
     accent: '#003a6c',
-    imageAlt: 'Waterford Clinic',
+    imageAlt: 'Waterford Walk In Clinic',
   },
 }
 
@@ -88,11 +88,11 @@ export const services = [
   },
   {
     icon: '🩺',
-    title: 'General Illness & GP Care',
+    title: 'General Illness & Medical Care',
     tagline: 'Everyday health, seen today',
-    desc: 'Diagnosis and treatment for everything from seasonal flu and chest infections to ongoing chronic conditions. Our GPs listen to your symptoms, carry out any checks needed, and set out a recovery plan that fits your life.',
+    desc: 'Diagnosis and treatment for everything from seasonal flu and chest infections to ongoing chronic conditions. Our doctors listen to your symptoms, carry out any checks needed, and set out a recovery plan that fits your life.',
     image: 'https://images.unsplash.com/photo-1758691462666-6470b740f544?w=800&q=80&auto=format&fit=crop',
-    imageAlt: 'GP consulting with a patient',
+    imageAlt: 'Doctor consulting with a patient',
   },
   {
     icon: '🌸',
@@ -130,7 +130,7 @@ export const services = [
 
 /** Options in the booking form's "reason for visit" dropdown. */
 export const services_dropdown = [
-  'General GP Consultation',
+  'General Medical Consultation',
   'Injury or Minor Procedure',
   "Women's Health",
   'Mental Health Consultation',
@@ -202,7 +202,7 @@ export const features = [
 export const faqs = [
   {
     q: 'Do I need an appointment to be seen?',
-    a: 'No. Waterford Clinic operates a walk-in service, so you can arrive and wait for the next available doctor. Booking online is recommended if you want a guaranteed time, especially at busier periods.',
+    a: 'No. Waterford Walk In Clinic operates a walk-in service, so you can arrive and wait for the next available doctor. Booking online is recommended if you want a guaranteed time, especially at busier periods.',
   },
   {
     q: 'What can I be seen for?',
@@ -218,7 +218,7 @@ export const faqs = [
   },
   {
     q: 'What if I have a medical emergency?',
-    a: 'Waterford Clinic is not an emergency service. In a life-threatening emergency always call 999 or 112, or go to your nearest Emergency Department.',
+    a: 'Waterford Walk In Clinic is not an emergency service. In a life-threatening emergency always call 999 or 112, or go to your nearest Emergency Department.',
   },
 ]
 

@@ -51,7 +51,7 @@ export default function Hero() {
           </h1>
 
           <p className="hero-lead">
-            Urgent medical care and out-of-hours GP services in Waterford, for when your
+            Urgent, out-of-hours medical care in Waterford, for when your
             own doctor is closed. Book a time below, or simply walk in and be seen.
           </p>
 

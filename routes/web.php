@@ -15,7 +15,7 @@ Route::get('/up', fn () => response('OK'))->name('up');
 |--------------------------------------------------------------------------
 | The previous client registered one server-rendered HTML page per clinic
 | location here, so Google got real crawlable content per location instead
-| of the SPA shell. Waterford Clinic is a single site, so there are no
+| of the SPA shell. Waterford Walk In Clinic is a single site, so there are no
 | location pages — the homepage IS the location page.
 |
 | If topic landing pages are added later (e.g. /minor-injuries or
