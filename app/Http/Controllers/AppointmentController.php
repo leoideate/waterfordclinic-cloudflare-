@@ -86,9 +86,13 @@ class AppointmentController extends Controller
             $settings = ClinicBookingSettings::firstOrCreate(
                 ['clinic_id' => $clinic->id], ['bookings_enabled' => true]
             );
-            $to = $settings->notification_email ?: $clinic->email;
+            // notification_email supports a comma-separated list (e.g. clinic
+            // owner + reception), falling back to the clinic's main email.
+            $to = $settings->notification_email
+                ? array_filter(array_map('trim', explode(',', $settings->notification_email)))
+                : array_filter([$clinic->email]);
             try {
-                if ($to) {
+                if (! empty($to)) {
                     Mail::to($to)->queue(new AppointmentRequested($appt, $clinic->name));
                 }
             } catch (\Throwable $e) {

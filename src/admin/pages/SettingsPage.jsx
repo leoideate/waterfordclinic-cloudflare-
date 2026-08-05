@@ -110,8 +110,8 @@ export default function SettingsPage() {
               <input type="email" className="admin-input" value={clinicEdits[cl.id]?.email || ''} onChange={e => setClinicEdits(p => ({ ...p, [cl.id]: { ...p[cl.id], email: e.target.value } }))} />
             </div>
             <div className="admin-field">
-              <label>Notification email (where new bookings are sent)</label>
-              <input type="email" className="admin-input" value={clinicEdits[cl.id]?.notification_email || ''} onChange={e => setClinicEdits(p => ({ ...p, [cl.id]: { ...p[cl.id], notification_email: e.target.value } }))} />
+              <label>Notification email (where new bookings are sent — comma-separate for multiple)</label>
+              <input type="text" className="admin-input" value={clinicEdits[cl.id]?.notification_email || ''} onChange={e => setClinicEdits(p => ({ ...p, [cl.id]: { ...p[cl.id], notification_email: e.target.value } }))} placeholder="info@waterfordclinic.ie, suellen@waterfordclinic.ie" />
             </div>
           </div>
           <div className="admin-field">

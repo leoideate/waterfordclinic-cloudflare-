@@ -83,7 +83,17 @@ class AdminClinicController extends Controller
             'bookings_enabled'    => ['required', 'boolean'],
             'confirmation_message'=> ['sometimes', 'nullable', 'string', 'max:1000'],
             'unavailable_message' => ['sometimes', 'nullable', 'string', 'max:1000'],
-            'notification_email'  => ['sometimes', 'nullable', 'email', 'max:150'],
+            'notification_email'  => ['sometimes', 'nullable', 'string', 'max:255', function ($attribute, $value, $fail) {
+                if (! $value) {
+                    return;
+                }
+                foreach (explode(',', $value) as $email) {
+                    if (! filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                        $fail('Each notification email must be a valid email address.');
+                        return;
+                    }
+                }
+            }],
         ]);
         $settings = ClinicBookingSettings::updateOrCreate(['clinic_id' => $clinic->id], $data);
         AdminActivityLog::record('clinic.booking.update', $data, $clinic);
