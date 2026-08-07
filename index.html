@@ -19,14 +19,14 @@
     />
     <meta name="keywords" content="medical care Waterford, walk-in clinic Waterford, out of hours medical care Waterford, urgent care Waterford, doctor appointment Waterford" />
     <link rel="canonical" href="%SITE_DOMAIN%/" />
-    <title>Waterford Walk In Clinic | Walk-In & Out-of-Hours Medical Care</title>
+    <title>Waterford Walk In Clinic | Walk-In & Out-of-Hours Care</title>
 
     <!-- ============================================================ -->
     <!-- 🌐 SOCIAL SHARING: Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <!-- ============================================================ -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="%SITE_BRAND%" />
-    <meta property="og:title" content="Waterford Walk In Clinic | Walk-In & Out-of-Hours Medical Care" />
+    <meta property="og:title" content="Waterford Walk In Clinic | Walk-In & Out-of-Hours Care" />
     <meta property="og:description" content="Walk-in and out-of-hours medical care in Waterford. Urgent care, minor injuries, women's health and same-day consultations." />
     <meta property="og:url" content="%SITE_DOMAIN%/" />
     <!-- TODO: og-image.png does not exist yet — supply a real 1200×630 PNG.
@@ -43,7 +43,7 @@
     <!-- 🐦 SOCIAL SHARING: Twitter / X Card                          -->
     <!-- ============================================================ -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Waterford Walk In Clinic | Walk-In & Out-of-Hours Medical Care" />
+    <meta name="twitter:title" content="Waterford Walk In Clinic | Walk-In & Out-of-Hours Care" />
     <meta name="twitter:description" content="Walk-in and out-of-hours medical care in Waterford. Urgent care, minor injuries, women's health and same-day consultations." />
     <meta name="twitter:image" content="%SITE_DOMAIN%/og-image.png" />
 
@@ -107,7 +107,20 @@
           "telephone": "+353515552424",
           "email": "info@waterfordclinic.ie",
           "parentOrganization": { "@id": "%SITE_DOMAIN%/#organization" },
-          "medicalSpecialty": ["GeneralPractice", "PrimaryCare"]
+          "medicalSpecialty": ["GeneralPractice", "PrimaryCare"],
+          "areaServed": {
+            "@type": "City",
+            "name": "Waterford"
+          },
+          "image": "%SITE_DOMAIN%/logo.png",
+          "availableService": [
+            { "@type": "MedicalProcedure", "name": "Injuries & Minor Procedures" },
+            { "@type": "MedicalTherapy", "name": "General Illness & Medical Care" },
+            { "@type": "MedicalTherapy", "name": "Women's Health" },
+            { "@type": "MedicalTherapy", "name": "Mental Health Consultations" },
+            { "@type": "MedicalProcedure", "name": "Sick Certificates" },
+            { "@type": "MedicalTest", "name": "Blood Tests" }
+          ]
         },
         {
           "@type": "FAQPage",

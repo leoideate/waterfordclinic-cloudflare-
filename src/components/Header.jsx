@@ -58,7 +58,7 @@ export default function Header() {
             {/* Intrinsic size matches the real logo's ~1.27:1 aspect ratio
                 (icon mark stacked over the wordmark) — CSS still drives the
                 rendered height, this is just a layout-shift hint. */}
-            <img src={site.logo.header} alt="" width="81" height="64" />
+            <img src={site.logo.header} alt={`${site.brand} — walk-in clinic in Waterford`} width="81" height="64" />
           </span>
           <span className="brand-text">
             <small>{site.tagline}</small>
