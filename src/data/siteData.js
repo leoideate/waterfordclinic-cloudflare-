@@ -69,13 +69,15 @@ export const clinics = {
 /* =====================================================================
    SERVICES — adapted from waterfordclinic.ie/services
    ---------------------------------------------------------------------
-   Images are stock photography (Unsplash), NOT this clinic's own — the
-   client hasn't supplied real photography yet. Each URL was verified to
-   actually resolve before being added here (loaded and checked at the
-   exact CDN URL used below, not guessed from memory). Swap for real
-   photos of the clinic/team as soon as they're available; until then
-   this is materially better than the icon-only fallback but should not
-   be mistaken for photos of the actual premises or staff.
+   Images are stock photography (originally Unsplash), NOT this clinic's
+   own — the client hasn't supplied real photography yet. Self-hosted as
+   WebP in public/images/ (was hotlinked from images.unsplash.com — an
+   extra external origin for no benefit, PageSpeed audit Aug 2026); each
+   was verified to load correctly before being converted, not guessed
+   from memory. Swap for real photos of the clinic/team as soon as
+   they're available; until then this is materially better than the
+   icon-only fallback but should not be mistaken for photos of the
+   actual premises or staff.
    ===================================================================== */
 export const services = [
   {
@@ -83,7 +85,7 @@ export const services = [
     title: 'Injuries & Minor Procedures',
     tagline: 'Faster than an ED wait',
     desc: 'Prompt treatment for acute minor injuries and small surgical procedures — minor lacerations and stitches, skin lesion removal, and ingrown toenail treatment under local anaesthetic. A reliable alternative to a busy emergency department.',
-    image: 'https://images.unsplash.com/photo-1609840534277-88833ef3ddeb?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-minor-injuries.webp',
     imageAlt: 'Minor injury treatment and wound care',
     slug: 'minor-injuries',
   },
@@ -92,7 +94,7 @@ export const services = [
     title: 'General Illness & Medical Care',
     tagline: 'Everyday health, seen today',
     desc: 'Diagnosis and treatment for everything from seasonal flu and chest infections to ongoing chronic conditions. Our doctors listen to your symptoms, carry out any checks needed, and set out a recovery plan that fits your life.',
-    image: 'https://images.unsplash.com/photo-1758691462666-6470b740f544?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-general-illness.webp',
     imageAlt: 'Doctor consulting with a patient',
     slug: null, // no dedicated landing page yet — links back to the homepage's #services card
   },
@@ -101,7 +103,7 @@ export const services = [
     title: "Women's Health",
     tagline: 'Confidential and unhurried',
     desc: 'Preventive screening, cervical checks, fertility advice and family planning. Includes professional guidance on contraception and hands-on procedures such as Implanon insertion and removal.',
-    image: 'https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-womens-health.webp',
     imageAlt: "Women's health consultation",
     slug: 'womens-health',
   },
@@ -110,7 +112,7 @@ export const services = [
     title: 'Mental Health Consultations',
     tagline: 'A confidential space to talk',
     desc: 'A welcoming, private space to discuss anxiety, stress or low mood. We carry out a proper clinical assessment and work with you on a realistic plan — coping strategies, treatment, or onward referral.',
-    image: 'https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-mental-health.webp',
     imageAlt: 'Mental health consultation',
     slug: null, // no dedicated landing page yet — links back to the homepage's #services card
   },
@@ -119,7 +121,7 @@ export const services = [
     title: 'Sick Certificates',
     tagline: 'Same-day medical certs',
     desc: 'Medical certificates for work, school or college, issued following a proper consultation. Quick to arrange when illness stops you attending and your employer needs documentation.',
-    image: 'https://images.unsplash.com/photo-1678940805259-e2be79fa33e4?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-sick-certs.webp',
     imageAlt: 'Doctor issuing a medical certificate',
     slug: 'sick-certificates',
   },
@@ -128,7 +130,7 @@ export const services = [
     title: 'Blood Tests',
     tagline: 'Clear answers, explained',
     desc: 'Routine and diagnostic blood work carried out on site, with results explained clearly by a doctor and onward referral arranged quickly if anything needs following up.',
-    image: 'https://images.unsplash.com/photo-1542884841-9f546e727bca?w=800&q=80&auto=format&fit=crop',
+    image: '/images/svc-blood-tests.webp',
     imageAlt: 'Blood sample being taken for testing',
     slug: 'blood-tests',
   },

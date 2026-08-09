@@ -4,23 +4,25 @@ import { track } from '../lib/analytics.js'
 
 /* Full-bleed professional healthcare photo for the hero background.
    A dark teal scrim (.hero-overlay below) is applied on top for text
-   readability. Stock photo, verified to actually load before being added
-   here — not the previous client's photo, chosen distinct on purpose.
-   To swap: change HERO_BG_ID (keep the sizing params in HERO_BG_SRCSET),
-   or point at your own image in /public — e.g. src="/hero.jpg" and drop
-   the srcSet prop below.
+   readability. Stock photo (Unsplash), verified to actually load before
+   being added here — not the previous client's photo, chosen distinct
+   on purpose. Originally hotlinked from images.unsplash.com; now
+   self-hosted in public/images/ (converted to WebP, same responsive
+   widths) — that was a whole extra external origin (DNS + TLS handshake
+   under throttled mobile conditions) for zero benefit, since the CDN
+   wasn't buying us anything a static file on the same host doesn't
+   already give (PageSpeed audit, Aug 2026). To swap: replace the
+   hero-*.webp files in public/images/ (same four widths) or point
+   HERO_BG_SRC/HERO_BG_SRCSET elsewhere.
 
    Rendered as a real <img>, not a CSS background — PageSpeed Insights
-   flagged this as the page's LCP element at 8.1s (Aug 2026 audit) because
-   a background-image isn't discoverable by the browser's preload scanner
-   until CSS is parsed, and was being requested at a fixed 2000px width
-   even on mobile. An <img> with fetchpriority + a real srcset fixes both:
-   found immediately in the initial HTML, and sized to the viewport. */
-const HERO_BG_ID = 'photo-1758691461957-474a7686e388'
-const HERO_BG_PARAMS = 'q=80&auto=format&fit=crop'
-const HERO_BG_SRC = `https://images.unsplash.com/${HERO_BG_ID}?w=1600&${HERO_BG_PARAMS}`
+   originally flagged this as the page's LCP element at 8.1s because a
+   background-image isn't discoverable by the browser's preload scanner
+   until CSS is parsed. An <img> with fetchpriority + a real srcset fixes
+   that: found immediately in the initial HTML, and sized to the viewport. */
+const HERO_BG_SRC = '/images/hero-1600.webp'
 const HERO_BG_SRCSET = [800, 1200, 1600, 2000]
-  .map((w) => `https://images.unsplash.com/${HERO_BG_ID}?w=${w}&${HERO_BG_PARAMS} ${w}w`)
+  .map((w) => `/images/hero-${w}.webp ${w}w`)
   .join(', ')
 
 export default function Hero() {

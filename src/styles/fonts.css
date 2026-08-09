@@ -1,0 +1,48 @@
+/* =====================================================================
+   Self-hosted fonts
+   ---------------------------------------------------------------------
+   Previously loaded from Google Fonts, which meant two extra external
+   origins (fonts.googleapis.com, fonts.gstatic.com) — each one a fresh
+   DNS lookup + TLS handshake under throttled mobile conditions
+   (PageSpeed audit, Aug 2026). Same families, same weights, vendored
+   locally in public/fonts/ instead. Fetched once from Google's own CDN;
+   re-run that fetch (see git history / PR that added this file for the
+   exact curl commands) if the type ramp ever needs a new weight.
+   ===================================================================== */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 700; /* variable font — one file covers the whole range */
+  font-display: swap;
+  src: url('/fonts/inter-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/poppins-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/poppins-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/poppins-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/poppins-800.woff2') format('woff2');
+}

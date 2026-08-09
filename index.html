@@ -138,33 +138,16 @@
     </script>
 
     <!-- ============================================================ -->
-    <!-- Fonts                                                         -->
+    <!-- Fonts + hero image                                            -->
     <!-- ============================================================ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Non-blocking font load (PageSpeed Insights flagged this stylesheet
-         as render-blocking, ~1.76s of the mobile LCP, Aug 2026 audit): load
-         it at low priority via the print-media trick, then swap it to all
-         media once it's actually downloaded, instead of holding up first
-         paint. The <noscript> tag is the fallback for JS-disabled browsers. -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
-    <!-- Speeds up the hero background photo (largest above-fold element).
-         TODO: HERO_BG_URL in src/components/Hero.jsx is still the generic
-         stock photo from the platform template — swap for the client's own
-         photography when available, and drop this preconnect if it's
-         hosted locally instead of on Unsplash. -->
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <!-- Both used to be hotlinked from third-party origins (Google Fonts,
+         Unsplash) — each one a separate DNS lookup + TLS handshake under
+         throttled mobile conditions with zero benefit over serving them
+         from this same host (PageSpeed audit, Aug 2026). Fonts are now
+         self-hosted @font-face rules (src/styles/fonts.css, imported in
+         main.jsx — no <link> needed here, they're part of the main CSS
+         bundle). The hero photo is now public/images/hero-*.webp,
+         referenced directly in src/components/Hero.jsx. -->
   </head>
   <body>
     <div id="root"></div>
