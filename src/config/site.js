@@ -57,16 +57,19 @@ export const site = {
   /* ---- Analytics & advertising ----
      These are the client's own properties — never copy another client's
      IDs here, or Waterford's traffic/conversions report into their account.
-     GA4 measurement ID and Google Ads conversion ID are live. Per-event
-     labels are still TODO: in Google Ads, Tools → Conversions → open each
-     conversion action → "Tag setup" → copy its label, paste below. Without
-     a label, trackAdsConversion() in src/lib/analytics.js no-ops for that
-     event (see the check there) — the base tag loads either way. */
+     GA4 measurement ID, Google Ads conversion ID, and the booking_success
+     label are live. Google's own setup instructions say to paste the event
+     snippet as a static <script> in <head> — deliberately NOT done that
+     way here, since that fires on every page load, not just real bookings.
+     trackAdsConversion() in src/lib/analytics.js fires this label only from
+     BookingForm's actual success handler. appointment_form_submit still
+     TODO if you want a softer "started a booking" signal too — same
+     Tools → Conversions → Tag setup → label lookup in Google Ads. */
   analytics: {
     ga4MeasurementId: 'G-8PHZNFN4HM',
     googleAdsConversionId: 'AW-18369394166',
     googleAdsLabels: {
-      booking_success: '',
+      booking_success: 'iAeACM3t5d4cEPbrmrdE',
       appointment_form_submit: '',
     },
   },
