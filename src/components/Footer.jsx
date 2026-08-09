@@ -84,6 +84,15 @@ export default function Footer() {
 
       <style>{`
         .site-footer { background: var(--green-900); color: rgba(255,255,255,0.85); padding-top: 64px; }
+        /* .muted is a shared utility (src/styles/global.css) tuned for light
+           backgrounds — var(--ink-500) on the dark navy footer measured
+           2.83:1 contrast, well under the 4.5:1 WCAG AA minimum for normal
+           text (PageSpeed accessibility audit, Aug 2026). Covers both the
+           clinic address span (empty until the client confirms it — this
+           was invisible today but would have failed the moment it wasn't)
+           and the bottom bar's tagline, matching the same 0.7-alpha white
+           already used for .footer-legal a right next to it. */
+        .site-footer .muted { color: rgba(255,255,255,0.7); }
         .footer-grid {
           display: grid; grid-template-columns: 1.5fr 1fr 1.3fr 1fr; gap: 40px;
           padding-bottom: 48px;
