@@ -243,14 +243,22 @@ export const faqs = [
    ===================================================================== */
 export const servicePages = [
   {
+    // Retargeted to lead with "doctor waterford" (480/mo), then "gp
+    // waterford" (320/mo), then "walk in clinic waterford" (140/mo) — all
+    // low paid competition, keyword difficulty 0 (client keyword research,
+    // Aug 2026). One page for all three rather than three near-duplicate
+    // pages, since the intent is essentially the same query. Deliberately
+    // NOT targeting "near me" variants here — that's local-pack/Google
+    // Business Profile territory, not a page Google would rank for
+    // location-dependent intent; kept out per the same research.
     slug: 'walk-in-doctor',
-    h1: 'Walk-In Doctor in Waterford',
-    metaTitle: 'Walk-In Doctor Waterford | Same-Day GP Care — Waterford Walk In Clinic',
-    metaDescription: 'See a walk-in doctor in Waterford today, no appointment needed. Genuine out-of-hours GP care for when your own doctor is closed.',
+    h1: 'Doctor in Waterford — Walk-In & GP Care',
+    metaTitle: 'Doctor Waterford | GP & Walk-In Clinic — Waterford Walk In Clinic',
+    metaDescription: 'See a doctor in Waterford today — GP care, walk-in clinic, no appointment needed. Genuine out-of-hours cover for when your own doctor is closed.',
     tagline: 'No appointment needed',
-    intro: 'Waterford Walk In Clinic is a walk-in medical practice. Arrive without an appointment and be seen by the next available doctor, or book online in advance to hold a time that suits you. We offer genuine out-of-hours cover, beyond the usual 9-to-5, for when your own GP is closed.',
+    intro: 'Waterford Walk In Clinic is a doctor-led walk-in clinic and GP practice in Waterford. Arrive without an appointment and be seen by the next available doctor, or book online in advance to hold a time that suits you. We offer genuine out-of-hours cover, beyond the usual 9-to-5, for when your own GP is closed.',
     bullets: [
-      'Walk in without an appointment — no referral needed',
+      'See a doctor or GP without an appointment',
       'Or book online in a minute to hold a time that suits you',
       'Out-of-hours cover, evenings and weekends',
       'Fully qualified doctors, registered with the Irish Medical Council',

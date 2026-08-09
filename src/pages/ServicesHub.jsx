@@ -25,7 +25,7 @@ function ServicesHubContent() {
           <Link to="/walk-in-doctor" className="service-hub-card service-hub-card-featured">
             <span className="shc-icon" aria-hidden="true">🩺</span>
             <span>
-              <strong>Walk-In Doctor</strong>
+              <strong>Doctor &amp; Walk-In GP Care</strong>
               <span>No appointment needed — see the next available doctor</span>
             </span>
           </Link>
