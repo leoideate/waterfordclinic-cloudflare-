@@ -57,12 +57,14 @@ export const site = {
   /* ---- Analytics & advertising ----
      These are the client's own properties — never copy another client's
      IDs here, or Waterford's traffic/conversions report into their account.
-     GA4 measurement ID is live. Google Ads conversion ID + labels are still
-     TODO: create the conversion action in Google Ads (Tools → Conversions),
-     then paste the AW-... ID and per-event labels here. */
+     GA4 measurement ID and Google Ads conversion ID are live. Per-event
+     labels are still TODO: in Google Ads, Tools → Conversions → open each
+     conversion action → "Tag setup" → copy its label, paste below. Without
+     a label, trackAdsConversion() in src/lib/analytics.js no-ops for that
+     event (see the check there) — the base tag loads either way. */
   analytics: {
     ga4MeasurementId: 'G-8PHZNFN4HM',
-    googleAdsConversionId: '',
+    googleAdsConversionId: 'AW-18369394166',
     googleAdsLabels: {
       booking_success: '',
       appointment_form_submit: '',
