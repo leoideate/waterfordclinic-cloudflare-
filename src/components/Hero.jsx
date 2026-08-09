@@ -6,10 +6,22 @@ import { track } from '../lib/analytics.js'
    A dark teal scrim (.hero-overlay below) is applied on top for text
    readability. Stock photo, verified to actually load before being added
    here — not the previous client's photo, chosen distinct on purpose.
-   To swap: change the URL (keep the sizing params), or point at your own
-   image in /public — e.g. url('/hero.jpg'). */
-const HERO_BG_URL =
-  'https://images.unsplash.com/photo-1758691461957-474a7686e388?w=2000&q=80&auto=format&fit=crop'
+   To swap: change HERO_BG_ID (keep the sizing params in HERO_BG_SRCSET),
+   or point at your own image in /public — e.g. src="/hero.jpg" and drop
+   the srcSet prop below.
+
+   Rendered as a real <img>, not a CSS background — PageSpeed Insights
+   flagged this as the page's LCP element at 8.1s (Aug 2026 audit) because
+   a background-image isn't discoverable by the browser's preload scanner
+   until CSS is parsed, and was being requested at a fixed 2000px width
+   even on mobile. An <img> with fetchpriority + a real srcset fixes both:
+   found immediately in the initial HTML, and sized to the viewport. */
+const HERO_BG_ID = 'photo-1758691461957-474a7686e388'
+const HERO_BG_PARAMS = 'q=80&auto=format&fit=crop'
+const HERO_BG_SRC = `https://images.unsplash.com/${HERO_BG_ID}?w=1600&${HERO_BG_PARAMS}`
+const HERO_BG_SRCSET = [800, 1200, 1600, 2000]
+  .map((w) => `https://images.unsplash.com/${HERO_BG_ID}?w=${w}&${HERO_BG_PARAMS} ${w}w`)
+  .join(', ')
 
 export default function Hero() {
   const { activeClinicKey, setBookingOpenFor, clinics } = useClinic()
@@ -35,10 +47,15 @@ export default function Hero() {
   return (
     <section className="hero" id="top">
       {/* ---- Full-bleed background image ---- */}
-      <div
+      <img
         className="hero-bg-image"
-        style={{ backgroundImage: `url("${HERO_BG_URL}")` }}
-        aria-hidden="true"
+        src={HERO_BG_SRC}
+        srcSet={HERO_BG_SRCSET}
+        sizes="100vw"
+        alt=""
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
       />
       {/* ---- Dark-green gradient overlay for text readability ---- */}
       <div className="hero-overlay" aria-hidden="true" />
@@ -115,8 +132,9 @@ export default function Hero() {
         /* ---- Full-bleed background image ---- */
         .hero-bg-image {
           position: absolute; inset: 0;
-          background-size: cover;
-          background-position: center;
+          width: 100%; height: 100%;
+          object-fit: cover;
+          object-position: center;
           transform: scale(1.02);
           z-index: 0;
         }

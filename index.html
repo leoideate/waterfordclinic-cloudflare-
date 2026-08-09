@@ -142,10 +142,23 @@
     <!-- ============================================================ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Non-blocking font load (PageSpeed Insights flagged this stylesheet
+         as render-blocking, ~1.76s of the mobile LCP, Aug 2026 audit): load
+         it at low priority via the print-media trick, then swap it to all
+         media once it's actually downloaded, instead of holding up first
+         paint. The <noscript> tag is the fallback for JS-disabled browsers. -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <!-- Speeds up the hero background photo (largest above-fold element).
          TODO: HERO_BG_URL in src/components/Hero.jsx is still the generic
          stock photo from the platform template — swap for the client's own
