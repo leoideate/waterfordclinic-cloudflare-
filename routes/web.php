@@ -39,12 +39,21 @@ Route::get('/up', fn () => response('OK'))->name('up');
 | reaches the Laravel API controllers and is NOT swallowed here.
 */
 Route::get('/{any}', function (string $any = '') {
-    // Only the SPA root and everything under /admin are real routes — the
-    // rest of the public site navigates via #anchors on the homepage.
-    // Anything else is a broken/unknown URL and must return a real 404,
-    // not a soft-404 copy of the homepage (which confuses Google's indexer
-    // and can surface old dead links as "duplicate content").
-    if ($any !== '' && ! str_starts_with($any, 'admin')) {
+    // Only the SPA root, everything under /admin, and known SPA deep-links
+    // are real routes — the rest of the public site navigates via #anchors
+    // on the homepage. Anything else is a broken/unknown URL and must
+    // return a real 404, not a soft-404 copy of the homepage (which
+    // confuses Google's indexer and can surface old dead links as
+    // "duplicate content").
+    //
+    // 'appointment' is the Google Ads landing/booking link — React Router
+    // (src/App.jsx catch-all + ClinicContext's setBookingOpenFor) opens the
+    // booking form for it client-side once the SPA shell loads, but a fresh
+    // browser hit (an ad click, not in-app navigation) reaches THIS route
+    // first, so it has to be allow-listed here too or it 404s before React
+    // ever runs.
+    $knownSpaDeepLinks = ['appointment'];
+    if ($any !== '' && ! str_starts_with($any, 'admin') && ! in_array(rtrim($any, '/'), $knownSpaDeepLinks, true)) {
         abort(404);
     }
 

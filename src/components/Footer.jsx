@@ -18,7 +18,7 @@ export default function Footer() {
                 behind it is the standard fix rather than inventing a second
                 logo asset. */}
             <div className="footer-logo-card">
-              <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="213" height="168" />
+              <img src={site.logo.footer} alt={site.brand} className="footer-logo" width="107" height="84" />
             </div>
           </div>
           <p>Walk-in and out-of-hours medical care in Waterford, for when your own doctor is closed — book online or just drop in.</p>
@@ -91,9 +91,9 @@ export default function Footer() {
         .footer-brand .brand { margin-bottom: 16px; }
         .footer-logo-card {
           display: inline-flex; background: #fff; border-radius: 10px;
-          padding: 14px 18px;
+          padding: 10px 14px;
         }
-        .footer-logo { display: block; height: 168px; width: auto; }
+        .footer-logo { display: block; height: 84px; width: auto; }
         .footer-brand p { color: rgba(255,255,255,0.72); font-size: 0.95rem; max-width: 320px; margin-top: 16px; }
         .footer-reg { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 10px; max-width: 320px; }
         .footer-socials { display: flex; gap: 10px; margin-top: 16px; }
