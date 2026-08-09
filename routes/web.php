@@ -26,53 +26,61 @@ Route::permanentRedirect('/services/', '/#services');
 
 /*
 |--------------------------------------------------------------------------
-| Standalone SEO landing pages
-|--------------------------------------------------------------------------
-| The previous client registered one server-rendered HTML page per clinic
-| location here, so Google got real crawlable content per location instead
-| of the SPA shell. Waterford Walk In Clinic is a single site, so there are no
-| location pages — the homepage IS the location page.
-|
-| If topic landing pages are added later (e.g. /minor-injuries or
-| /sick-certificates to match service-level ad groups), register them here
-| BEFORE the SPA catch-all below, and add them to public/sitemap.xml.
-*/
-
-/*
-|--------------------------------------------------------------------------
 | SPA catch-all — serve the built React frontend
 |--------------------------------------------------------------------------
 | Any GET request that isn't an API route (/api/*), a static asset
 | (/build/*, /favicon.png, etc., served directly by nginx), or /up is
 | handed to the React SPA. React Router then takes over client-side.
 |
-| The frontend is built into public/build/index.html by `npm run build`.
-| If that file is missing we show a clear "build the frontend" message
+| $spaPages maps each real URL to ITS OWN prerendered HTML file (see
+| scripts/prerender.js) — the dedicated service/keyword landing pages each
+| get a file with a real <title>/description/canonical, not a copy of the
+| homepage's, which would defeat the point of building them separately.
+| Adding a 6th page needs an entry here AND in src/data/siteData.js's
+| servicePages AND public/sitemap.xml — three places, on purpose, so a
+| missing one fails loudly (404 or wrong metadata) rather than silently.
+|
+| If a file is missing we show a clear "build the frontend" message
 | instead of a confusing 404 — helpful on first deploy / CI debugging.
 |
 | IMPORTANT: routes/api.php is loaded BEFORE this file, so /api/* still
 | reaches the Laravel API controllers and is NOT swallowed here.
 */
 Route::get('/{any}', function (string $any = '') {
-    // Only the SPA root, everything under /admin, and known SPA deep-links
-    // are real routes — the rest of the public site navigates via #anchors
-    // on the homepage. Anything else is a broken/unknown URL and must
-    // return a real 404, not a soft-404 copy of the homepage (which
-    // confuses Google's indexer and can surface old dead links as
-    // "duplicate content").
-    //
-    // 'appointment' is the Google Ads landing/booking link — React Router
-    // (src/App.jsx catch-all + ClinicContext's setBookingOpenFor) opens the
-    // booking form for it client-side once the SPA shell loads, but a fresh
-    // browser hit (an ad click, not in-app navigation) reaches THIS route
-    // first, so it has to be allow-listed here too or it 404s before React
-    // ever runs.
-    $knownSpaDeepLinks = ['appointment'];
-    if ($any !== '' && ! str_starts_with($any, 'admin') && ! in_array(rtrim($any, '/'), $knownSpaDeepLinks, true)) {
-        abort(404);
+    if (str_starts_with($any, 'admin')) {
+        $file = 'index.html';
+    } else {
+        // Only the SPA root and known SPA pages/deep-links are real routes
+        // — the rest of the public site navigates via #anchors on the
+        // homepage. Anything else is a broken/unknown URL and must return
+        // a real 404, not a soft-404 copy of the homepage (which confuses
+        // Google's indexer and can surface old dead links as "duplicate
+        // content").
+        $spaPages = [
+            '' => 'index.html',
+            // Booking deep-link (Google Ads landing URL). Not a keyword
+            // target, so it reuses the homepage's prerendered file — React
+            // Router + ClinicContext's setBookingOpenFor open the form
+            // client-side once the SPA shell loads.
+            'appointment' => 'index.html',
+            // Dedicated keyword-targeted landing pages (SEO audit P1, Aug
+            // 2026) — each has its own prerendered file.
+            'walk-in-doctor' => 'walk-in-doctor.html',
+            'minor-injuries' => 'minor-injuries.html',
+            'womens-health' => 'womens-health.html',
+            'blood-tests' => 'blood-tests.html',
+            'sick-certificates' => 'sick-certificates.html',
+        ];
+
+        $normalized = rtrim($any, '/');
+        if (! array_key_exists($normalized, $spaPages)) {
+            abort(404);
+        }
+
+        $file = $spaPages[$normalized];
     }
 
-    $path = public_path('build/index.html');
+    $path = public_path('build/' . $file);
 
     if (! file_exists($path)) {
         return response(
@@ -81,11 +89,12 @@ Route::get('/{any}', function (string $any = '') {
         );
     }
 
-    // IMPORTANT: never let the browser cache index.html. The hashed JS/CSS
-    // assets in /build/assets/* ARE cacheable (their filename changes on
-    // every build), but index.html references them by name — if a browser
-    // caches the HTML, it will keep loading the OLD bundle forever, even
-    // after a new deploy. This caused "stale admin pages" bugs in production.
+    // IMPORTANT: never let the browser cache these HTML files. The hashed
+    // JS/CSS assets in /build/assets/* ARE cacheable (their filename
+    // changes on every build), but these HTML files reference them by
+    // name — if a browser caches the HTML, it will keep loading the OLD
+    // bundle forever, even after a new deploy. This caused "stale admin
+    // pages" bugs in production.
     //
     // Use response() with explicit content + headers (response()->file()
     // sometimes breaks when chained with ->header() in some Laravel versions).

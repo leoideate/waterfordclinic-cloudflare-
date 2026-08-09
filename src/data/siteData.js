@@ -223,6 +223,92 @@ export const faqs = [
 ]
 
 /* =====================================================================
+   SERVICE / KEYWORD LANDING PAGES — src/pages/ServiceLanding.jsx
+   ---------------------------------------------------------------------
+   Dedicated URLs for the SEO audit's P1 recommendation (Aug 2026): the
+   homepage bundles all six services into on-page anchors, so none of them
+   have a URL Google can rank independently. Built from copy already live
+   and approved elsewhere on the site (the `services` cards above, the
+   `faqs` above) — NOT new claims. No fee, hours or address content here,
+   same reason those are absent everywhere else in this file: unconfirmed
+   by the client.
+   ===================================================================== */
+export const servicePages = [
+  {
+    slug: 'walk-in-doctor',
+    h1: 'Walk-In Doctor in Waterford',
+    metaTitle: 'Walk-In Doctor Waterford | Same-Day GP Care — Waterford Walk In Clinic',
+    metaDescription: 'See a walk-in doctor in Waterford today, no appointment needed. Genuine out-of-hours GP care for when your own doctor is closed.',
+    tagline: 'No appointment needed',
+    intro: 'Waterford Walk In Clinic is a walk-in medical practice. Arrive without an appointment and be seen by the next available doctor, or book online in advance to hold a time that suits you. We offer genuine out-of-hours cover, beyond the usual 9-to-5, for when your own GP is closed.',
+    bullets: [
+      'Walk in without an appointment — no referral needed',
+      'Or book online in a minute to hold a time that suits you',
+      'Out-of-hours cover, evenings and weekends',
+      'Fully qualified doctors, registered with the Irish Medical Council',
+    ],
+    faqs: [faqs[0], faqs[4]],
+  },
+  {
+    slug: 'minor-injuries',
+    h1: 'Minor Injuries & Stitches in Waterford',
+    metaTitle: 'Minor Injury Clinic Waterford | Stitches & Wound Care — Waterford Walk In Clinic',
+    metaDescription: 'Minor injury treatment in Waterford — lacerations and stitches, skin lesion removal and ingrown toenail treatment. Faster than an ED wait.',
+    tagline: services[0].tagline,
+    intro: services[0].desc,
+    bullets: [
+      'Minor lacerations and stitches',
+      'Skin lesion removal',
+      'Ingrown toenail treatment under local anaesthetic',
+    ],
+    faqs: [faqs[2]],
+  },
+  {
+    slug: 'womens-health',
+    h1: "Women's Health in Waterford",
+    metaTitle: "Women's Health Clinic Waterford | Confidential Care — Waterford Walk In Clinic",
+    metaDescription: "Confidential women's health care in Waterford — preventive screening, cervical checks, contraception and family planning advice.",
+    tagline: services[2].tagline,
+    intro: services[2].desc,
+    bullets: [
+      'Preventive screening and cervical checks',
+      'Fertility advice and family planning',
+      'Contraception guidance',
+      'Implanon insertion and removal',
+    ],
+    faqs: [faqs[1]],
+  },
+  {
+    slug: 'blood-tests',
+    h1: 'Blood Tests in Waterford',
+    metaTitle: 'Blood Tests Waterford | Same-Day Results Explained — Waterford Walk In Clinic',
+    metaDescription: 'Routine and diagnostic blood tests in Waterford, carried out on site with results explained clearly by a doctor.',
+    tagline: services[5].tagline,
+    intro: services[5].desc,
+    bullets: [
+      'Routine and diagnostic blood work',
+      'Results explained clearly by a doctor',
+      'Fast onward referral if follow-up is needed',
+    ],
+    faqs: [faqs[1]],
+  },
+  {
+    slug: 'sick-certificates',
+    h1: 'Sick Certificates in Waterford',
+    metaTitle: 'Sick Cert Waterford | Same-Day Medical Certificates — Waterford Walk In Clinic',
+    metaDescription: 'Same-day sick certificates in Waterford for work, school or college, issued following a consultation with one of our doctors.',
+    tagline: services[4].tagline,
+    intro: services[4].desc,
+    bullets: [
+      'For work, school or college',
+      'Issued following a proper consultation',
+      'Quick to arrange when illness stops you attending',
+    ],
+    faqs: [faqs[3]],
+  },
+]
+
+/* =====================================================================
    TESTIMONIALS
    ---------------------------------------------------------------------
    Deliberately EMPTY. The previous client's reviews are real, named

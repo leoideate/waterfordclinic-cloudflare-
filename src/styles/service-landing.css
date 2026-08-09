@@ -1,0 +1,82 @@
+/* =====================================================================
+   Dedicated service/keyword landing pages (src/pages/ServiceLanding.jsx)
+   ===================================================================== */
+
+.service-landing {
+  padding-block: clamp(32px, 6vw, 64px) 80px;
+}
+
+.service-breadcrumb {
+  font-size: 0.88rem;
+  color: var(--ink-500);
+  margin-bottom: 24px;
+}
+.service-breadcrumb a { color: var(--green-700); }
+.service-breadcrumb span[aria-hidden] { margin: 0 6px; }
+
+.service-tagline {
+  color: var(--green-700);
+  font-family: var(--font-head);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.service-landing h1 {
+  max-width: 760px;
+  margin-bottom: 18px;
+}
+
+.service-intro {
+  max-width: 680px;
+  font-size: 1.08rem;
+  color: var(--ink-700);
+  margin-bottom: 28px;
+}
+
+.service-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: grid;
+  gap: 14px;
+  max-width: 560px;
+}
+.service-bullets li {
+  position: relative;
+  padding-left: 30px;
+  font-size: 1rem;
+  color: var(--ink-700);
+}
+.service-bullets li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 0;
+  color: var(--green-600);
+  font-weight: 700;
+}
+
+.service-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.service-faqs {
+  max-width: 720px;
+  border-top: 1px solid var(--green-100);
+  padding-top: 32px;
+  margin-bottom: 40px;
+}
+.service-faqs h2 { margin-bottom: 20px; }
+.service-faq-item { margin-bottom: 22px; }
+.service-faq-item h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.service-faq-item p { color: var(--ink-500); }
+
+.service-back a { color: var(--green-700); font-weight: 600; }
+
+@media (max-width: 620px) {
+  .service-cta-row { flex-direction: column; align-items: stretch; }
+}
