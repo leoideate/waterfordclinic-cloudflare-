@@ -18,7 +18,12 @@ export const site = {
   /* ---- Identity ---- */
   brand: 'Waterford Walk In Clinic',
   tagline: 'Waterford',
-  domain: 'https://www.waterfordclinic.ie',
+  // Apex, not www — www.waterfordclinic.ie 301s to this, and Google's own
+  // crawl of the homepage resolves to the apex URL (confirmed via SEO audit,
+  // Aug 2026). Canonical tags, Open Graph URLs and JSON-LD @id/url fields
+  // all derive from this value, so it must match the redirect target or
+  // every page contradicts its own canonical.
+  domain: 'https://waterfordclinic.ie',
   locale: 'en-IE',
   lang: 'en-IE',
 

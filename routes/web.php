@@ -11,6 +11,21 @@ Route::get('/up', fn () => response('OK'))->name('up');
 
 /*
 |--------------------------------------------------------------------------
+| Legacy WordPress URLs — permanent redirects
+|--------------------------------------------------------------------------
+| /services/ is still indexed by Google (SEO audit, Aug 2026) and was a
+| real page on the old WordPress site this domain used to run — the
+| current site collapsed services into an on-page #services anchor and
+| never redirected the old URL, so it 404s. 301 it into the live section
+| instead of 404ing on a URL Google still sends people to. If dedicated
+| per-service pages are built later, redirect this to the new services
+| hub page instead.
+*/
+Route::permanentRedirect('/services', '/#services');
+Route::permanentRedirect('/services/', '/#services');
+
+/*
+|--------------------------------------------------------------------------
 | Standalone SEO landing pages
 |--------------------------------------------------------------------------
 | The previous client registered one server-rendered HTML page per clinic
