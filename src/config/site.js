@@ -50,13 +50,13 @@ export const site = {
   },
 
   /* ---- Analytics & advertising ----
-     Intentionally EMPTY. These must be the client's own properties.
-     Leaving the previous client's IDs here would report Waterford's
-     traffic and booking conversions into their GA4 and Google Ads
-     accounts. Empty means no tag loads at all, which is the safe default.
-     TODO: create GA4 property + Ads conversion action, paste IDs here. */
+     These are the client's own properties — never copy another client's
+     IDs here, or Waterford's traffic/conversions report into their account.
+     GA4 measurement ID is live. Google Ads conversion ID + labels are still
+     TODO: create the conversion action in Google Ads (Tools → Conversions),
+     then paste the AW-... ID and per-event labels here. */
   analytics: {
-    ga4MeasurementId: '',
+    ga4MeasurementId: 'G-8PHZNFN4HM',
     googleAdsConversionId: '',
     googleAdsLabels: {
       booking_success: '',

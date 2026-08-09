@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { clinics } from '../data/siteData.js'
 
 const ClinicContext = createContext(null)
@@ -10,6 +11,8 @@ const DEFAULT_CLINIC_KEY = clinicKeys[0]
 export const isSingleClinic = clinicKeys.length === 1
 
 export function ClinicProvider({ children }) {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [activeClinicKey, setActiveClinicKey] = useState(DEFAULT_CLINIC_KEY)
 
   // Which clinic the user is currently booking for (null = booking section hidden).
@@ -43,6 +46,12 @@ export function ClinicProvider({ children }) {
    *   - lockedClinic     (locks the form to this clinic — no switching)
    *
    * Pass null to close/hide the booking section again.
+   *
+   * Also pushes the URL to /appointment — this is the single place every
+   * "Book Appointment" CTA on the site funnels through, so it's the one
+   * spot that needs to know about the URL. Gives the booking flow a real,
+   * shareable, distinctly-trackable address instead of just an in-page
+   * anchor scroll (needed for Google Ads/Analytics to see it as a page).
    */
   const setBookingOpenFor = useCallback((key) => {
     if (key === null) {
@@ -53,7 +62,10 @@ export function ClinicProvider({ children }) {
     setActiveClinicKey(key)
     setBookingOpenForKey(key)
     setLockedClinic(key)
-  }, [])
+    if (location.pathname !== '/appointment') {
+      navigate('/appointment')
+    }
+  }, [navigate, location.pathname])
 
   // Deep-link support: ?clinic=kildare (from the standalone /kildare SEO
   // page's "Book Now" links) opens the booking form pre-locked to that
@@ -62,6 +74,19 @@ export function ClinicProvider({ children }) {
     const key = new URLSearchParams(window.location.search).get('clinic')
     if (key && clinics[key]) {
       setBookingOpenFor(key)
+      setTimeout(() => {
+        document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Direct visits to /appointment (e.g. a Google Ads landing link) open the
+  // booking form immediately instead of dropping the visitor on the closed
+  // "choose a clinic" prompt they'd have to click through again.
+  useEffect(() => {
+    if (window.location.pathname === '/appointment' && !bookingOpenFor) {
+      setBookingOpenFor(DEFAULT_CLINIC_KEY)
       setTimeout(() => {
         document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }, 100)
