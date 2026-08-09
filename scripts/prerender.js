@@ -46,9 +46,19 @@ try {
   // ---- Homepage: same file, same metadata, just the root markup ----
   writePage(indexPath, baseTemplate, render('/'), root)
 
-  // ---- Each dedicated landing page gets its own file + its own
-  //      title/description/canonical — not a copy of the homepage's. ----
-  for (const page of servicePages) {
+  // ---- Each dedicated landing page (plus the /services hub) gets its
+  //      own file + its own title/description/canonical — not a copy of
+  //      the homepage's. ----
+  const pages = [
+    {
+      slug: 'services',
+      metaTitle: 'Our Services | Waterford Walk In Clinic',
+      metaDescription:
+        "Walk-in doctor, minor injuries, women's health, blood tests, sick certificates and more — every service available at Waterford Walk In Clinic.",
+    },
+    ...servicePages,
+  ]
+  for (const page of pages) {
     const pageUrl = `${site.domain.replace(/\/$/, '')}/${page.slug}`
     const html = baseTemplate
       .replaceAll(HOMEPAGE_TITLE, page.metaTitle)

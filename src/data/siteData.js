@@ -85,6 +85,7 @@ export const services = [
     desc: 'Prompt treatment for acute minor injuries and small surgical procedures — minor lacerations and stitches, skin lesion removal, and ingrown toenail treatment under local anaesthetic. A reliable alternative to a busy emergency department.',
     image: 'https://images.unsplash.com/photo-1609840534277-88833ef3ddeb?w=800&q=80&auto=format&fit=crop',
     imageAlt: 'Minor injury treatment and wound care',
+    slug: 'minor-injuries',
   },
   {
     icon: '🩺',
@@ -93,6 +94,7 @@ export const services = [
     desc: 'Diagnosis and treatment for everything from seasonal flu and chest infections to ongoing chronic conditions. Our doctors listen to your symptoms, carry out any checks needed, and set out a recovery plan that fits your life.',
     image: 'https://images.unsplash.com/photo-1758691462666-6470b740f544?w=800&q=80&auto=format&fit=crop',
     imageAlt: 'Doctor consulting with a patient',
+    slug: null, // no dedicated landing page yet — links back to the homepage's #services card
   },
   {
     icon: '🌸',
@@ -101,6 +103,7 @@ export const services = [
     desc: 'Preventive screening, cervical checks, fertility advice and family planning. Includes professional guidance on contraception and hands-on procedures such as Implanon insertion and removal.',
     image: 'https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=800&q=80&auto=format&fit=crop',
     imageAlt: "Women's health consultation",
+    slug: 'womens-health',
   },
   {
     icon: '💚',
@@ -109,6 +112,7 @@ export const services = [
     desc: 'A welcoming, private space to discuss anxiety, stress or low mood. We carry out a proper clinical assessment and work with you on a realistic plan — coping strategies, treatment, or onward referral.',
     image: 'https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=800&q=80&auto=format&fit=crop',
     imageAlt: 'Mental health consultation',
+    slug: null, // no dedicated landing page yet — links back to the homepage's #services card
   },
   {
     icon: '📄',
@@ -117,6 +121,7 @@ export const services = [
     desc: 'Medical certificates for work, school or college, issued following a proper consultation. Quick to arrange when illness stops you attending and your employer needs documentation.',
     image: 'https://images.unsplash.com/photo-1678940805259-e2be79fa33e4?w=800&q=80&auto=format&fit=crop',
     imageAlt: 'Doctor issuing a medical certificate',
+    slug: 'sick-certificates',
   },
   {
     icon: '🩸',
@@ -125,6 +130,7 @@ export const services = [
     desc: 'Routine and diagnostic blood work carried out on site, with results explained clearly by a doctor and onward referral arranged quickly if anything needs following up.',
     image: 'https://images.unsplash.com/photo-1542884841-9f546e727bca?w=800&q=80&auto=format&fit=crop',
     imageAlt: 'Blood sample being taken for testing',
+    slug: 'blood-tests',
   },
 ]
 

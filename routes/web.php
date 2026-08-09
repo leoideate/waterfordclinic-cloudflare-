@@ -11,21 +11,6 @@ Route::get('/up', fn () => response('OK'))->name('up');
 
 /*
 |--------------------------------------------------------------------------
-| Legacy WordPress URLs — permanent redirects
-|--------------------------------------------------------------------------
-| /services/ is still indexed by Google (SEO audit, Aug 2026) and was a
-| real page on the old WordPress site this domain used to run — the
-| current site collapsed services into an on-page #services anchor and
-| never redirected the old URL, so it 404s. 301 it into the live section
-| instead of 404ing on a URL Google still sends people to. If dedicated
-| per-service pages are built later, redirect this to the new services
-| hub page instead.
-*/
-Route::permanentRedirect('/services', '/#services');
-Route::permanentRedirect('/services/', '/#services');
-
-/*
-|--------------------------------------------------------------------------
 | SPA catch-all — serve the built React frontend
 |--------------------------------------------------------------------------
 | Any GET request that isn't an API route (/api/*), a static asset
@@ -63,6 +48,12 @@ Route::get('/{any}', function (string $any = '') {
             // Router + ClinicContext's setBookingOpenFor open the form
             // client-side once the SPA shell loads.
             'appointment' => 'index.html',
+            // Services hub — was a 301 to /#services (still indexed from
+            // the old WordPress site, per SEO audit Aug 2026), but a
+            // redirect to a homepage anchor isn't distinct content either.
+            // Now a real page with its own prerendered file, linking out
+            // to each dedicated service page below.
+            'services' => 'services.html',
             // Dedicated keyword-targeted landing pages (SEO audit P1, Aug
             // 2026) — each has its own prerendered file.
             'walk-in-doctor' => 'walk-in-doctor.html',
