@@ -42,15 +42,15 @@ export const clinics = {
     phone: '051 552424',
     email: 'info@waterfordclinic.ie',
 
-    // TODO: confirm real opening hours. The out-of-hours positioning on
-    // their current site implies evening/weekend cover, but no times are
-    // published — do not guess. `time: ''` (not a placeholder string) for
-    // the same reason as `address` above — every render site filters out
-    // rows with an empty time.
+    // TODO: confirm real Mon–Fri opening hours. Saturday and Sunday are
+    // confirmed by the client (Aug 2026): 12:00pm – 6:00pm, online booking
+    // included. `time: ''` (not a placeholder string) is left for the
+    // still-unconfirmed Mon–Fri row — every render site filters out rows
+    // with an empty time.
     hours: [
       { day: 'Mon – Fri', time: '' },
-      { day: 'Saturday', time: '' },
-      { day: 'Sunday', time: '' },
+      { day: 'Saturday', time: '12:00pm – 6:00pm' },
+      { day: 'Sunday', time: '12:00pm – 6:00pm' },
     ],
     hoursNote: '',
 

@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  *   1. Clinic bookings disabled         → whole day unavailable
  *   2. Holiday (full day or time band)  → whole day or band unavailable
  *   3. Temporary closure (range+window) → whole day or band unavailable
- *   4. Weekday schedule (Sun = closed)  → if closed, no slots
+ *   4. Weekday schedule                → if closed that day, no slots
  *   5. Generate base slots from open/close/minutes
  *   6. Subtract weekly + one-off breaks (per time band)
  *   7. Mark slots full (existing appointments ≥ max_per_slot)
@@ -75,16 +75,6 @@ class AvailabilityService
                 'reason' => $settings->unavailable_message
                     ?: ClinicBookingSettings::DEFAULT_UNAVAILABLE,
                 'reason_code' => 'bookings_disabled',
-            ]);
-        }
-
-        // 1.5. Sundays are phone-only — no online slots, regardless of the
-        // weekday schedule (clinics are open, but online booking is not).
-        if ($weekday === 0) {
-            return array_merge($empty, [
-                'available' => false,
-                'reason' => 'Sunday appointments are by phone only. Please call the clinic to book.',
-                'reason_code' => 'sunday_phone_only',
             ]);
         }
 
