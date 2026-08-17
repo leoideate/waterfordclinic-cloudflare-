@@ -28,7 +28,7 @@
 
   "migrations": [
     {
-      "tag": "v2",
+      "tag": "v1",
       "new_sqlite_classes": ["WaterfordClinicContainer"]
     }
   ]
