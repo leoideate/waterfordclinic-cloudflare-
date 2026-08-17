@@ -1,0 +1,20 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "waterfordclinic-keepalive",
+  "main": "index.ts",
+  "compatibility_date": "2026-08-01",
+
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
+
+  "vars": {
+    // Ping the staging subdomain during Phase A/B of the migration. Update
+    // this to the production custom domain right before/at DNS cutover
+    // (Phase C) - see the migration plan. Getting this wrong doesn't break
+    // anything visibly (a stray ping to the wrong host just does nothing
+    // useful), it just silently fails to prevent cold starts on whichever
+    // deployment actually needs it, so double-check it after any cutover.
+    "TARGET_URL": "https://cf-staging.waterfordclinic.ie/up"
+  }
+}

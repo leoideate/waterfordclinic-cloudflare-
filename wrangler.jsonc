@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "waterfordclinic",
+  "main": "worker/entry.ts",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // NOTE: instance_type sizing (lite/basic/standard-1) and any regional
+  // pinning (regions/jurisdiction) should be confirmed against the current
+  // Cloudflare account/plan at actual deploy time - not assumed here.
+  "containers": [
+    {
+      "class_name": "WaterfordClinicContainer",
+      "image": "./Dockerfile",
+      "max_instances": 2,
+      "instance_type": "basic"
+    }
+  ],
+
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CLINIC_CONTAINER",
+        "class_name": "WaterfordClinicContainer"
+      }
+    ]
+  },
+
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["WaterfordClinicContainer"]
+    }
+  ]
+
+  // Secrets (APP_KEY, DB_PASSWORD, MAIL_PASSWORD, etc.) are NOT set here -
+  // set them via `wrangler secret put <NAME>` so they never live in a
+  // committed file. See .env.example for the full list of required names.
+}

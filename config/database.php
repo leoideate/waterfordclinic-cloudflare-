@@ -61,7 +61,8 @@ return [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
+            // Was copy-pasted from the mysql block above (3306) - Postgres's real default.
+            'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'twl_clinic'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
@@ -69,7 +70,40 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => 'prefer',
+            // 'prefer' silently falls back to plaintext if TLS negotiation fails - not
+            // acceptable for a production DB reached over the public internet.
+            'sslmode' => 'require',
+        ],
+
+        // Cloudflare D1, reached over its REST API (not a Worker binding -
+        // this app runs as a PHP process in a Container, which has no
+        // access to Workers-runtime-only bindings like a `d1_databases`
+        // binding or Hyperdrive). D1 has no interactive transaction support
+        // over HTTP - only an atomic batch() primitive requiring every
+        // statement prepared upfront - so transaction_mode is set to
+        // 'exception' rather than the package default 'silent': any future
+        // code that assumes DB::transaction() gives real atomicity fails
+        // loudly at the point of use instead of silently losing it.
+        'd1' => [
+            'driver' => 'd1',
+            'd1_driver' => 'rest',
+            'prefix' => '',
+            'database' => env('CF_D1_DATABASE_ID', ''),
+            'auth' => [
+                'token' => env('CF_D1_API_TOKEN', ''),
+                'account_id' => env('CF_D1_ACCOUNT_ID', ''),
+            ],
+            'timeout' => env('CF_D1_TIMEOUT', 10),
+            'retries' => env('CF_D1_RETRIES', 2),
+            'transaction_mode' => 'exception',
+            'circuit_breaker' => [
+                'enabled' => true,
+                // Deliberately NOT 'database' (D1 itself) - detecting "is
+                // D1 down" by querying D1 would be circular. File-backed
+                // circuit-breaker state losing continuity on a container
+                // restart is self-healing, not a reliability regression.
+                'cache_driver' => 'file',
+            ],
         ],
     ],
 

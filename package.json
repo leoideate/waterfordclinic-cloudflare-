@@ -7,15 +7,20 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "wrangler deploy",
+    "deploy:keepalive": "wrangler deploy -c cloudflare/keepalive/wrangler.jsonc"
   },
   "dependencies": {
+    "@cloudflare/containers": "^0.3.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.4"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260817.1",
     "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.2"
+    "vite": "^5.4.2",
+    "wrangler": "^4.34.0"
   }
 }
