@@ -15,6 +15,7 @@ export class WaterfordClinicContainer extends Container {
 
 interface Env {
   CLINIC_CONTAINER: DurableObjectNamespace<WaterfordClinicContainer>;
+  APP_KEY: string;
 }
 
 export default {
@@ -24,6 +25,24 @@ export default {
     // deliberate: every request must land on the same container instance,
     // not get sharded across a different one per path.
     const container = getContainer(env.CLINIC_CONTAINER, 'primary');
+
+    // Worker secrets/vars (this `env` object) are NOT automatically
+    // forwarded to the container process - they only reach it if passed
+    // explicitly here, and only take effect when the container actually
+    // starts (a no-op on an already-running instance).
+    await container.startAndWaitForPorts({
+      startOptions: {
+        envVars: {
+          APP_KEY: env.APP_KEY,
+          APP_ENV: 'production',
+          APP_DEBUG: 'false',
+          APP_URL: 'https://waterfordclinic-cloudflare.yesideate.workers.dev',
+          SANCTUM_STATEFUL_DOMAINS: 'waterfordclinic-cloudflare.yesideate.workers.dev',
+          LOG_CHANNEL: 'stderr',
+        },
+      },
+    });
+
     return await container.fetch(request);
   },
 };
